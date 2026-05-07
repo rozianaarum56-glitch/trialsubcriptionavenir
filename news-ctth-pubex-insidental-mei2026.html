@@ -3806,6 +3806,10 @@ const AUTH = {
   }
 };
 
+// Expose to window so other scripts (e.g. paywall lock) can access
+window.AUTH = AUTH;
+window._sb = _sb;
+
 document.addEventListener('DOMContentLoaded', () => AUTH.init());
 </script>
 <script>
