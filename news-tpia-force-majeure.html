@@ -3519,19 +3519,20 @@ const AUTH = {
   // Return true jika user punya akses aktif (trial 7 hari ATAU paid subscription)
   isSubscriptionActive() {
     if (!AUTH.currentUser) return false;
-    if (!AUTH.profile) return false;
     
     const now = new Date();
+    const profile = AUTH.profile || {};
     
-    // 1. Check paid subscription
-    if (AUTH.profile.subscription_until) {
-      const until = new Date(AUTH.profile.subscription_until);
+    // 1. Paid subscription
+    if (profile.subscription_until) {
+      const until = new Date(profile.subscription_until);
       if (now < until) return true;
     }
     
-    // 2. Check 7-day trial
-    if (AUTH.profile.trial_started_at) {
-      const trialStart = new Date(AUTH.profile.trial_started_at);
+    // 2. 7-day trial — fallback ke user.created_at
+    const trialStartRaw = profile.trial_started_at || AUTH.currentUser.created_at;
+    if (trialStartRaw) {
+      const trialStart = new Date(trialStartRaw);
       const trialEnd = new Date(trialStart.getTime() + 7 * 24 * 60 * 60 * 1000);
       if (now < trialEnd) return true;
     }
@@ -3542,18 +3543,21 @@ const AUTH = {
   // Return status string: 'guest' | 'trial' | 'active' | 'expired_trial' | 'expired_paid'
   getSubscriptionStatus() {
     if (!AUTH.currentUser) return 'guest';
-    if (!AUTH.profile) return 'guest';
     
     const now = new Date();
+    const profile = AUTH.profile || {};
     
-    if (AUTH.profile.subscription_until) {
-      const until = new Date(AUTH.profile.subscription_until);
+    // 1. Paid subscription check
+    if (profile.subscription_until) {
+      const until = new Date(profile.subscription_until);
       if (now < until) return 'active';
       return 'expired_paid';
     }
     
-    if (AUTH.profile.trial_started_at) {
-      const trialStart = new Date(AUTH.profile.trial_started_at);
+    // 2. Trial check — fallback ke user.created_at jika kolom trial_started_at belum ada di DB
+    const trialStartRaw = profile.trial_started_at || AUTH.currentUser.created_at;
+    if (trialStartRaw) {
+      const trialStart = new Date(trialStartRaw);
       const trialEnd = new Date(trialStart.getTime() + 7 * 24 * 60 * 60 * 1000);
       if (now < trialEnd) return 'trial';
       return 'expired_trial';
@@ -3705,8 +3709,10 @@ const AUTH = {
 
     // Login berhasil - tutup modal
     AUTH.currentUser = data.user;
+    await AUTH.loadProfile();
     AUTH.close();
     AUTH.refreshUI();
+    if (typeof window._applyLock === 'function') window._applyLock();
   },
 
   // Logout

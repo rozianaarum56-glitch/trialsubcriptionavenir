@@ -3956,19 +3956,20 @@ const AUTH = {
   // Return true jika user punya akses aktif (trial 7 hari ATAU paid subscription)
   isSubscriptionActive() {
     if (!AUTH.currentUser) return false;
-    if (!AUTH.profile) return false;
     
     const now = new Date();
+    const profile = AUTH.profile || {};
     
-    // 1. Check paid subscription
-    if (AUTH.profile.subscription_until) {
-      const until = new Date(AUTH.profile.subscription_until);
+    // 1. Paid subscription
+    if (profile.subscription_until) {
+      const until = new Date(profile.subscription_until);
       if (now < until) return true;
     }
     
-    // 2. Check 7-day trial
-    if (AUTH.profile.trial_started_at) {
-      const trialStart = new Date(AUTH.profile.trial_started_at);
+    // 2. 7-day trial — fallback ke user.created_at
+    const trialStartRaw = profile.trial_started_at || AUTH.currentUser.created_at;
+    if (trialStartRaw) {
+      const trialStart = new Date(trialStartRaw);
       const trialEnd = new Date(trialStart.getTime() + 7 * 24 * 60 * 60 * 1000);
       if (now < trialEnd) return true;
     }
@@ -3979,18 +3980,21 @@ const AUTH = {
   // Return status string: 'guest' | 'trial' | 'active' | 'expired_trial' | 'expired_paid'
   getSubscriptionStatus() {
     if (!AUTH.currentUser) return 'guest';
-    if (!AUTH.profile) return 'guest';
     
     const now = new Date();
+    const profile = AUTH.profile || {};
     
-    if (AUTH.profile.subscription_until) {
-      const until = new Date(AUTH.profile.subscription_until);
+    // 1. Paid subscription check
+    if (profile.subscription_until) {
+      const until = new Date(profile.subscription_until);
       if (now < until) return 'active';
       return 'expired_paid';
     }
     
-    if (AUTH.profile.trial_started_at) {
-      const trialStart = new Date(AUTH.profile.trial_started_at);
+    // 2. Trial check — fallback ke user.created_at jika kolom trial_started_at belum ada di DB
+    const trialStartRaw = profile.trial_started_at || AUTH.currentUser.created_at;
+    if (trialStartRaw) {
+      const trialStart = new Date(trialStartRaw);
       const trialEnd = new Date(trialStart.getTime() + 7 * 24 * 60 * 60 * 1000);
       if (now < trialEnd) return 'trial';
       return 'expired_trial';
@@ -4142,8 +4146,10 @@ const AUTH = {
 
     // Login berhasil - tutup modal
     AUTH.currentUser = data.user;
+    await AUTH.loadProfile();
     AUTH.close();
     AUTH.refreshUI();
+    if (typeof window._applyLock === 'function') window._applyLock();
   },
 
   // Logout
@@ -4578,8 +4584,6 @@ window.showNewsList = function(){ window.showPage('news'); };
       subEl.textContent = 'Periode langganan Anda sudah selesai. Perpanjang sekarang untuk lanjutkan akses tanpa kehilangan riwayat.';
       if (priceEl) priceEl.style.display = '';
       actionsEl.innerHTML = '<button class="gl-btn-primary" onclick="window.location.href=\'index.html#pricing\'">Perpanjang Langganan</button>';
-    } else if (status === 'guest') {
-      // default — keep original text
     }
   }
   
@@ -4595,21 +4599,56 @@ window.showNewsList = function(){ window.showPage('news'); };
     if (isLocked) updateOverlayContent();
   }
   
+  // Expose globally so login()/register() can call directly
+  window._applyLock = applyLock;
+  
+  // Initial: assume locked (guest)
   applyLock();
   document.addEventListener('DOMContentLoaded', applyLock);
-  setTimeout(applyLock, 800);
-  setTimeout(applyLock, 2000);
   
-  if (window.AUTH) {
-    const origRefresh = window.AUTH.refreshUI;
-    if (origRefresh) {
+  // Listen to Supabase auth state change directly (most reliable)
+  function hookAuth() {
+    if (window._sb && window._sb.auth) {
+      window._sb.auth.onAuthStateChange(async (event, session) => {
+        if (session?.user && window.AUTH) {
+          AUTH.currentUser = session.user;
+          if (typeof AUTH.loadProfile === 'function') {
+            await AUTH.loadProfile();
+          }
+        } else if (window.AUTH) {
+          AUTH.currentUser = null;
+          AUTH.profile = null;
+        }
+        applyLock();
+      });
+      return true;
+    }
+    return false;
+  }
+  
+  // Try to hook immediately, retry if _sb not ready yet
+  if (!hookAuth()) {
+    let attempts = 0;
+    const interval = setInterval(() => {
+      if (hookAuth() || ++attempts > 20) clearInterval(interval);
+    }, 200);
+  }
+  
+  // Also hook AUTH.refreshUI as fallback
+  setTimeout(() => {
+    if (window.AUTH && typeof window.AUTH.refreshUI === 'function') {
+      const orig = window.AUTH.refreshUI;
       window.AUTH.refreshUI = async function() {
-        const r = await origRefresh.apply(this, arguments);
+        const r = await orig.apply(this, arguments);
         applyLock();
         return r;
       };
     }
-  }
+    applyLock();
+  }, 500);
+  
+  setTimeout(applyLock, 1500);
+  setTimeout(applyLock, 3000);
 })();
 </script>
 </body>
