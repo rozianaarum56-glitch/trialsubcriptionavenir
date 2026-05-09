@@ -2991,22 +2991,21 @@ html body:not(.auth-state-user):not(.auth-state-guest) [data-auth="guest"] {
 </style>
 
 
-<style>
-/* ═══ PAYWALL MODULE — Reveal-then-Lock pattern ═══ */
-.paywall-locked-content {
-  display: none;
-}
-body.paywall-active .paywall-locked-content {
-  display: none;
-}
-body.paywall-unlocked .paywall-locked-content {
-  display: block;
-}
-body.paywall-unlocked .paywall-card-wrap {
-  display: none;
-}
 
-/* Fade out gradient di paragraf SEBELUM paywall */
+<style>
+/* ═══ FOOTER FORCE HIDE for guest (paywall-active) ═══ */
+
+</style>
+
+
+
+<style>
+/* ═══ PAYWALL V5 — Bisnis Indonesia Premium style ═══ */
+
+/* CLEAN CUT: hide locked content + footer for guest */
+body.paywall-active .paywall-locked-content {
+  display: none !important;
+}
 body.paywall-active .paywall-fade-tail {
   position: relative;
   max-height: 200px;
@@ -3018,260 +3017,506 @@ body.paywall-active .paywall-fade-tail::after {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 120px;
-  background: linear-gradient(180deg, transparent 0%, #fafaf7 90%);
-  pointer-events: none;
-}
-
-/* Default: paywall card hidden — show only when paywall-active */
-.paywall-card-wrap {
-  display: none;
-}
-body.paywall-active .paywall-card-wrap {
-  display: block;
-  margin: 0 auto;
-  max-width: 720px;
-  position: relative;
-}
-
-.paywall-card {
-  background: linear-gradient(135deg, #FFFFFF 0%, #FBFAF6 100%);
-  border: 1px solid #DDE7E2;
-  border-radius: 16px;
-  box-shadow: 0 12px 48px rgba(20, 83, 45, 0.12);
-  padding: 36px 40px;
-  text-align: center;
-  margin: 32px auto 24px;
-  position: relative;
-}
-
-.paywall-card::before {
-  content: '';
-  position: absolute;
-  top: -50px;
-  left: 0;
-  right: 0;
-  height: 50px;
+  height: 200px;
   background: linear-gradient(180deg, transparent 0%, #fafaf7 100%);
   pointer-events: none;
 }
 
-.pw-icon {
-  display: inline-flex;
-  width: 64px;
-  height: 64px;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(27,107,58,.12), rgba(27,107,58,.06));
-  border-radius: 50%;
-  font-size: 32px;
-  margin-bottom: 12px;
+/* Paywall card — Bisnis Indonesia style */
+.paywall-card-wrap {
+  display: none;
+  margin: 0 auto 60px;
+  max-width: 720px;
+  padding: 0 16px;
+}
+body.paywall-active .paywall-card-wrap {
+  display: block;
 }
 
-.pw-eyebrow {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  color: #5b8c3e;
-  text-transform: uppercase;
-  margin-bottom: 8px;
+.paywall-card {
+  background: #fafaf7;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 32px 28px;
+  text-align: center;
+  margin-top: 0;
 }
 
 .pw-title {
   font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif;
-  font-size: 30px;
+  font-size: 26px;
   font-weight: 700;
-  color: #14532d;
+  color: #1a1a1a;
   margin: 0 0 14px;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 .pw-deck {
-  font-size: 14.5px;
+  font-size: 14px;
   color: #4b5563;
   line-height: 1.65;
-  margin: 0 auto 20px;
-  max-width: 480px;
+  margin: 0 auto 12px;
+  max-width: 520px;
 }
 
-.pw-deck strong {
+.pw-inline-link {
   color: #1B6B3A;
-  font-weight: 700;
-}
-
-.pw-features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  justify-content: center;
-  margin: 18px 0 22px;
-  padding: 14px;
-  background: rgba(27,107,58,0.04);
-  border-radius: 10px;
-}
-
-.pw-feature {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12.5px;
-  color: #14532d;
+  text-decoration: underline;
   font-weight: 600;
 }
 
-.pw-feature::before {
-  content: '✓';
-  display: inline-flex;
-  width: 18px;
-  height: 18px;
-  align-items: center;
-  justify-content: center;
-  background: #1B6B3A;
-  color: #fff;
-  border-radius: 50%;
-  font-size: 11px;
-  font-weight: 700;
+.pw-trial-note {
+  font-size: 13.5px;
+  color: #1a1a1a;
+  font-weight: 600;
+  margin: 0 auto 22px;
+  max-width: 480px;
 }
 
-.pw-price {
+.pw-divider-text {
   font-size: 13px;
   color: #6b7280;
-  margin: 12px 0 18px;
+  margin: 16px 0 14px;
+  border-top: 1px dashed #d1d5db;
+  padding-top: 16px;
 }
-.pw-price strong { color: #14532d; font-size: 14px; }
 
-.pw-actions {
+.pw-plans {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 320px;
-  margin: 0 auto;
+  margin-bottom: 22px;
 }
 
-.pw-btn-primary {
-  background: #1B6B3A;
-  color: #fff;
-  border: none;
-  padding: 14px 22px;
+.pw-plan {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 1px solid #d1d5db;
   border-radius: 8px;
-  font-weight: 800;
-  font-size: 14px;
   cursor: pointer;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  transition: all .2s;
-  box-shadow: 0 4px 12px rgba(27,107,58,.25);
-}
-.pw-btn-primary:hover {
-  background: #14532d;
-  box-shadow: 0 6px 16px rgba(27,107,58,.35);
-  transform: translateY(-1px);
-}
-
-.pw-btn-secondary {
-  background: #fff;
-  color: #1B6B3A;
-  border: 1.5px solid #1B6B3A;
-  padding: 13px 22px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 13.5px;
-  cursor: pointer;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}
-.pw-btn-secondary:hover { background: rgba(27,107,58,.05); }
-
-.pw-link {
-  font-size: 12.5px;
-  color: #6b7280;
-  margin-top: 12px;
-}
-.pw-link a { 
-  color: #1B6B3A; 
-  text-decoration: none; 
-  font-weight: 700;
-  border-bottom: 1px dashed rgba(27,107,58,.4);
-}
-
-.pw-divider {
-  margin: 22px 0 16px;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: #94a3b8;
-  text-transform: uppercase;
-  position: relative;
-}
-.pw-divider::before, .pw-divider::after {
-  content: '';
-  display: inline-block;
-  width: 80px;
-  height: 1px;
-  background: #e5e7eb;
-  vertical-align: middle;
-  margin: 0 12px;
-}
-
-.pw-related {
-  text-align: left;
-  margin-top: 14px;
-}
-
-.pw-related ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.pw-related li {
-  padding: 10px 14px;
-  margin-bottom: 6px;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
   transition: all .15s;
+  background: #fff;
 }
-.pw-related li:hover {
+
+.pw-plan:hover {
   border-color: #1B6B3A;
   background: rgba(27,107,58,.02);
 }
 
-.pw-related a {
-  color: #14532d;
-  text-decoration: none;
-  font-size: 13.5px;
-  font-weight: 600;
-  display: block;
-  line-height: 1.45;
+.pw-plan input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: #1B6B3A;
+  margin: 0;
 }
 
-.pw-related-cat {
-  font-size: 10.5px;
+.pw-plan input[type="radio"]:checked + .pw-plan-content {
   font-weight: 700;
-  letter-spacing: 0.1em;
-  color: #5b8c3e;
-  text-transform: uppercase;
-  margin-bottom: 3px;
+}
+
+.pw-plan-best {
+  border-color: #1B6B3A;
+  border-style: dashed;
+  border-width: 1.5px;
+}
+
+.pw-plan-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pw-plan-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+.pw-badge-new {
+  background: #fef08a;
+  color: #713f12;
+}
+
+.pw-badge-deals {
+  background: #1f2937;
+  color: #fff;
+}
+
+.pw-badge-best {
+  background: #fef08a;
+  color: #713f12;
+}
+
+.pw-plan-price {
+  font-size: 14px;
+  color: #1a1a1a;
+}
+
+.pw-btn-subscribe {
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  letter-spacing: .02em;
+  transition: background .2s;
+}
+
+.pw-btn-subscribe:hover {
+  background: #1B6B3A;
+}
+
+/* Footer always visible */
+body.paywall-active footer,
+body.paywall-active .footer-spacer,
+body.paywall-unlocked footer,
+body.paywall-unlocked .footer-spacer {
+  display: block !important;
+  visibility: visible !important;
+  filter: none !important;
+}
+
+/* Subscriber: full clear content, no paywall */
+body.paywall-unlocked .paywall-card-wrap {
+  display: none !important;
+}
+body.paywall-unlocked .paywall-locked-content {
+  display: block !important;
+  filter: none !important;
+}
+body.paywall-unlocked .paywall-fade-tail {
+  max-height: none !important;
+  overflow: visible !important;
+}
+body.paywall-unlocked .paywall-fade-tail::after {
+  display: none !important;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .paywall-card { padding: 24px 18px; }
+  .pw-title { font-size: 22px; }
+  .pw-plan { padding: 12px 14px; gap: 10px; }
+  .pw-plan-content { font-size: 13px; }
+  .pw-plan-price { font-size: 13px; }
+}
+</style>
+<style>
+/* ═══ PAYWALL V5 — Bisnis Indonesia style ═══ */
+
+/* Hide locked content COMPLETELY */
+body.paywall-active .paywall-locked-content {
+  display: none !important;
+}
+
+/* Last visible paragraph before paywall: fade gradient */
+body.paywall-active .paywall-fade-tail {
+  position: relative;
+  max-height: 100px;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+body.paywall-active .paywall-fade-tail::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(180deg, transparent 0%, #fafaf7 90%);
+  pointer-events: none;
+}
+
+/* Paywall card container */
+.paywall-card-wrap {
+  display: none;
+  margin: 0 auto;
+  max-width: 720px;
+  padding: 0 16px;
+}
+body.paywall-active .paywall-card-wrap {
   display: block;
+}
+
+.paywall-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 32px 36px;
+  text-align: center;
+  margin: 24px auto 60px;
+}
+
+.pw-eyebrow {
+  font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.pw-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 4px 0 14px;
+  font-family: inherit;
+  letter-spacing: 0;
+}
+
+.pw-deck {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.65;
+  margin: 0 auto 20px;
+  max-width: 520px;
+}
+
+.pw-deck strong {
+  color: #111827;
+  font-weight: 700;
+}
+
+.pw-pricing-divider {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 18px 0 14px;
+}
+
+/* Tier pricing — 4 selectable rows */
+.pw-tiers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.pw-tier {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: #fff;
+  position: relative;
+}
+
+.pw-tier:hover {
+  border-color: #1B6B3A;
+  background: rgba(27, 107, 58, 0.02);
+}
+
+.pw-tier input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pw-tier-radio {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  transition: all 0.15s;
+}
+
+.pw-tier input:checked + .pw-tier-radio {
+  border-color: #1B6B3A;
+}
+
+.pw-tier input:checked + .pw-tier-radio::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background: #1B6B3A;
+  border-radius: 50%;
+}
+
+.pw-tier-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  justify-content: center;
+}
+
+.pw-tier-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.pw-badge-new {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.pw-badge-deal {
+  background: #1f2937;
+  color: #fff;
+}
+
+.pw-badge-best {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.pw-tier-price {
+  font-size: 14.5px;
+  color: #374151;
+}
+
+.pw-tier-price strong {
+  font-weight: 700;
+  color: #111827;
+  font-size: 15px;
+}
+
+.pw-tier-unit {
+  color: #6b7280;
+  font-size: 13.5px;
+}
+
+/* "Best Value" tier highlighted */
+.pw-tier-best {
+  border-color: #1B6B3A;
+  border-style: dashed;
+}
+
+.pw-tier input:checked ~ .pw-tier-content,
+.pw-tier-best.pw-tier input:checked + .pw-tier-radio + .pw-tier-content {
+  /* highlighted state */
+}
+
+/* Action buttons */
+.pw-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.pw-btn-primary {
+  background: #111827;
+  color: #fff;
+  border: none;
+  padding: 13px 32px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 280px;
+  transition: background 0.15s;
+}
+
+.pw-btn-primary:hover {
+  background: #000;
+}
+
+.pw-btn-link {
+  background: transparent;
+  border: none;
+  color: #1B6B3A;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.pw-btn-link:hover {
+  text-decoration: underline;
+}
+
+.pw-trial-hint {
+  margin-top: 18px;
+  padding: 12px 16px;
+  background: rgba(27, 107, 58, 0.06);
+  border-radius: 8px;
+  font-size: 12.5px;
+  color: #14532d;
+  line-height: 1.5;
+}
+
+.pw-trial-hint strong {
+  color: #1B6B3A;
+}
+
+/* Footer always clear & visible */
+body.paywall-active footer,
+body.paywall-active .footer-spacer,
+body.paywall-unlocked footer,
+body.paywall-unlocked .footer-spacer {
+  display: block !important;
+  visibility: visible !important;
+  filter: none !important;
+}
+
+/* Subscriber */
+body.paywall-unlocked .paywall-card-wrap {
+  display: none !important;
+}
+body.paywall-unlocked .paywall-locked-content {
+  display: block !important;
+}
+body.paywall-unlocked .paywall-fade-tail {
+  max-height: none !important;
+  overflow: visible !important;
+}
+body.paywall-unlocked .paywall-fade-tail::after {
+  display: none !important;
 }
 
 @media (max-width: 600px) {
-  .paywall-card { padding: 26px 22px; }
-  .pw-title { font-size: 24px; }
-  .pw-deck { font-size: 13.5px; }
-  .pw-features { padding: 10px; gap: 10px; }
-  .pw-feature { font-size: 11.5px; }
+  .paywall-card { padding: 24px 20px; margin: 16px auto 40px; }
+  .pw-eyebrow { font-size: 22px; }
+  .pw-title { font-size: 14.5px; }
+  .pw-tier { padding: 12px 14px; }
+  .pw-tier-price { font-size: 13.5px; }
 }
-
-/* Anti-flash: jangan flash paywall sebelum auth resolved */
-body:not(.auth-state-user):not(.auth-state-guest) .paywall-card-wrap,
-body:not(.auth-state-user):not(.auth-state-guest) .paywall-locked-content {
-  /* During pending: hide both — content akan fully visible in pending */
+</style>
+<style>
+/* ═══ PAYWALL FADE GRADIENT — fade bottom of preview content ═══ */
+body.paywall-active .paywall-card-wrap {
+  position: relative;
 }
-body:not(.auth-state-user):not(.auth-state-guest).paywall-active .paywall-card-wrap {
-  visibility: hidden;
+body.paywall-active .paywall-card-wrap::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -180px;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(180deg, transparent 0%, rgba(250, 250, 247, 0.7) 50%, #fafaf7 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 </style>
 </head>
@@ -3562,63 +3807,47 @@ body:not(.auth-state-user):not(.auth-state-guest).paywall-active .paywall-card-w
 <div class="stat"><div class="sv">Rp9.476</div><div class="sl">Total Aset Mar-26</div><div class="sd" style="color:var(--t2)">LK 31 Mar 2026 (tidak diaudit)</div></div>
 <div class="stat"><div class="sv" style="color:#C0392B">Rp7.340</div><div class="sl">Ekuitas Mar-26</div><div class="sd" style="color:var(--t2)">BVPS Rp925/saham</div></div>
 </div>
+
+
 <div class="paywall-card-wrap">
   <div class="paywall-card">
-    <div class="pw-icon">📖</div>
-    <div class="pw-eyebrow">Lanjut Membaca</div>
-    <h2 class="pw-title">Akses Penuh ke Artikel Ini</h2>
-    <p class="pw-deck">
-      Anda telah membaca <strong>preview</strong> artikel ini. Daftar sekarang untuk membaca <strong>analisis lengkap</strong> beserta seluruh corporate history, equity research, dan industry deep dives Avenir Research.
-    </p>
-    
-    <div class="pw-features">
-      <span class="pw-feature">2 Bulan Trial Gratis</span>
-      <span class="pw-feature">Akses Semua Riset</span>
-      <span class="pw-feature">Update Berkala</span>
+    <h2 class="pw-title">Bacaanmu terbatas?</h2>
+    <p class="pw-deck">Tenang, kamu hanya perlu <a href="#" onclick="if(window.AUTH) AUTH.open('login'); else window.location.href='index.html'; return false;" class="pw-inline-link">Masuk</a> atau <a href="#" onclick="if(window.AUTH) AUTH.open('register'); else window.location.href='index.html'; return false;" class="pw-inline-link">Daftar</a> dulu untuk lanjut membaca Avenir Research.</p>
+    <p class="pw-trial-note">Nikmati Gratis Akses baca selama <strong>2 bulan</strong> bagi member baru!</p>
+    <div class="pw-divider-text">atau langsung pilih paket terbaik kami:</div>
+    <div class="pw-plans">
+      <label class="pw-plan">
+        <input type="radio" name="plan" value="weekly">
+        <span class="pw-plan-content">
+          <span class="pw-plan-badge pw-badge-new">New</span>
+          <span class="pw-plan-price">Rp 30.000 / 7 hari</span>
+        </span>
+      </label>
+      <label class="pw-plan">
+        <input type="radio" name="plan" value="monthly">
+        <span class="pw-plan-content">
+          <span class="pw-plan-badge pw-badge-deals">Good Deals</span>
+          <span class="pw-plan-price">Rp 69.000 / 1 bulan</span>
+        </span>
+      </label>
+      <label class="pw-plan">
+        <input type="radio" name="plan" value="quarterly">
+        <span class="pw-plan-content">
+          <span class="pw-plan-badge pw-badge-deals">Good Deals</span>
+          <span class="pw-plan-price">Rp 187.000 / 3 bulan</span>
+        </span>
+      </label>
+      <label class="pw-plan pw-plan-best">
+        <input type="radio" name="plan" value="yearly" checked>
+        <span class="pw-plan-content">
+          <span class="pw-plan-badge pw-badge-best">Best Value</span>
+          <span class="pw-plan-price">Rp 690.000 / 12 bulan</span>
+        </span>
+      </label>
     </div>
-    
-    <p class="pw-price">Setelah trial: mulai <strong>Rp 69.000</strong> / bulan</p>
-    
-    <div class="pw-actions">
-      <button onclick="if(window.AUTH) AUTH.open('register'); else window.location.href='index.html'" class="pw-btn-primary">Mulai Trial 2 Bulan</button>
-      <button onclick="if(window.AUTH) AUTH.open('login'); else window.location.href='index.html'" class="pw-btn-secondary">Sudah Punya Akun</button>
-    </div>
-    
-    <div class="pw-link">Lihat detail paket di <a href="index.html">homepage</a></div>
-    
-    <div class="pw-divider">📚 Atau baca artikel lainnya</div>
-    
-    <div class="pw-related">
-      <ul>
-        <li>
-          <a href="artikel-pp19-revisi-royalti-minerba.html">
-            <span class="pw-related-cat">Regulasi · Minerba</span>
-            Bedah Mendalam Revisi PP 19/2025: Royalti Minerba Indonesia
-          </a>
-        </li>
-        <li>
-          <a href="artikel-cpo-investment-thesis.html">
-            <span class="pw-related-cat">Industry Thesis</span>
-            Investment Thesis: Crude Palm Oil (CPO) 2026
-          </a>
-        </li>
-        <li>
-          <a href="artikel-tpia-corporate-history.html">
-            <span class="pw-related-cat">Corporate History</span>
-            Chandra Asri: Sejarah Korporasi Hingga Pemain Regional
-          </a>
-        </li>
-        <li>
-          <a href="artikel-adro-corporate-history.html">
-            <span class="pw-related-cat">Corporate History</span>
-            Adaro: Dari Spanyol ke Bursa Jakarta
-          </a>
-        </li>
-      </ul>
-    </div>
+    <button onclick="if(window.AUTH) AUTH.open('register'); else window.location.href='index.html'" class="pw-btn-subscribe">Langganan Sekarang</button>
   </div>
 </div>
-
 <div class="paywall-locked-content">
 <h2 class="sec"><span class="n">1</span>Profil &amp; Model Bisnis</h2>
 <div class="box"><p>Produsen produk susu segar premium dan makanan berbasis susu — merek <strong>Cimory</strong>. Terintegrasi dari peternakan sapi perah hingga distribusi nasional. Ekspansi agresif ke segmen consumer food. Revenue Q1-2026 Rp3,12T <strong>+27,9% YoY</strong>.</p></div>
@@ -3710,6 +3939,10 @@ body:not(.auth-state-user):not(.auth-state-guest).paywall-active .paywall-card-w
 </tbody></table></div>
 </div>
 </div>
+
+</div>
+
+</div>
 <div class="footer-spacer" style="clear:both;height:0;width:100%"></div>
 <footer style="display:block!important;visibility:visible!important;background:#0f172a;color:#94a3b8;padding:48px 24px 24px;margin-top:80px">
   <div style="max-width:1280px;margin:0 auto">
@@ -3741,11 +3974,11 @@ body:not(.auth-state-user):not(.auth-state-guest).paywall-active .paywall-card-w
       <div style="font-size:12px;color:#64748b">© 2026 PT Avenir Fortuna Corporindo. Semua hak dilindungi.</div>
       <div style="font-size:11px;color:#64748b;font-style:italic">Riset bersifat informatif & edukatif — bukan rekomendasi investasi.</div>
     </div>
-  </div>
+  
 </footer>
 
 
-</div>
+
 <script>
 /* ═══ SUPABASE AUTH MODULE v2 ═══ */
 const AUTH = {
@@ -4522,6 +4755,38 @@ if (document.body && !document.body.classList.contains('auth-state-user') && !do
   
   setTimeout(applyPaywall, 500);
   setTimeout(applyPaywall, 2500);
+})();
+</script>
+
+<script>
+/* ═══ FOOTER FORCE VISIBLE — always show for both guest + subscriber ═══ */
+(function() {
+  function forceFooterVisible() {
+    const footer = document.querySelector('footer');
+    const spacers = document.querySelectorAll('.footer-spacer, div.footer-spacer');
+    if (footer) {
+      footer.removeAttribute('hidden');
+      footer.style.cssText = 'display:block!important;visibility:visible!important;background:#0f172a;color:#94a3b8;padding:48px 24px 24px;margin-top:80px;opacity:1!important;height:auto!important;';
+    }
+    spacers.forEach(s => {
+      s.removeAttribute('hidden');
+      s.style.cssText = 'clear:both;height:0;width:100%;display:block!important;';
+    });
+  }
+  // Run multiple times to catch any late-firing scripts
+  forceFooterVisible();
+  setTimeout(forceFooterVisible, 100);
+  setTimeout(forceFooterVisible, 500);
+  setTimeout(forceFooterVisible, 1500);
+  setTimeout(forceFooterVisible, 3000);
+  setInterval(forceFooterVisible, 2000); // periodic to catch SPA navigation effects
+  
+  if (window.MutationObserver) {
+    const observer = new MutationObserver(forceFooterVisible);
+    if (document.body) {
+      observer.observe(document.body, { attributes: true, childList: true, subtree: false });
+    }
+  }
 })();
 </script>
 </body>
