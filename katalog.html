@@ -3096,22 +3096,44 @@ html body:not(.auth-state-user):not(.auth-state-guest) [data-auth="guest"] {
   display: none !important;
 }
 </style>
+
+
 <style>
-/* ═══ AVENIR UNLOCK — Override existing lock for free public access ═══ */
-.guest-lock-wrap.is-guest .guest-lock-content,
-.guest-lock-wrap .guest-lock-content {
+/* ═══ AVENIR UNLOCK FINAL — force ALL cards/links clickable in catalog & article ═══ */
+.guest-lock-wrap,
+.guest-lock-wrap.is-guest,
+.guest-lock-wrap .guest-lock-content,
+.guest-lock-wrap.is-guest .guest-lock-content {
   filter: none !important;
-  pointer-events: auto !important;
+  -webkit-filter: none !important;
   -webkit-mask-image: none !important;
   mask-image: none !important;
   opacity: 1 !important;
+  pointer-events: auto !important;
+  user-select: auto !important;
+}
+.guest-lock-wrap *,
+.guest-lock-wrap.is-guest *,
+.guest-lock-wrap .guest-lock-content *,
+.guest-lock-wrap.is-guest .guest-lock-content * {
+  filter: none !important;
+  pointer-events: auto !important;
 }
 .guest-lock-wrap.is-guest .guest-lock-overlay,
 .guest-lock-overlay {
   display: none !important;
+  pointer-events: none !important;
 }
 .guest-lock-wrap {
   min-height: auto !important;
+}
+a[href*=".html"] {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+.card, [class*="card"], .research-card, .article-card, .grid > a {
+  pointer-events: auto !important;
+  cursor: pointer !important;
 }
 </style>
 </head>
@@ -4864,6 +4886,56 @@ if (document.body && !document.body.classList.contains('auth-state-user') && !do
         obs.observe(el, { attributes: true, attributeFilter: ['class'] });
       });
     });
+  }
+})();
+</script>
+
+<script>
+/* ═══ AVENIR UNLOCK FINAL SCRIPT — runtime force unlock all cards ═══ */
+(function() {
+  function forceUnlockCards() {
+    document.querySelectorAll('.guest-lock-wrap.is-guest').forEach(el => {
+      el.classList.remove('is-guest');
+    });
+    
+    document.querySelectorAll('a[href*=".html"]').forEach(a => {
+      a.style.setProperty('pointer-events', 'auto', 'important');
+      a.style.setProperty('cursor', 'pointer', 'important');
+      a.style.setProperty('opacity', '1', 'important');
+      a.style.setProperty('filter', 'none', 'important');
+    });
+    
+    document.querySelectorAll('.guest-lock-content').forEach(el => {
+      el.style.setProperty('pointer-events', 'auto', 'important');
+      el.style.setProperty('filter', 'none', 'important');
+      el.style.setProperty('opacity', '1', 'important');
+      el.style.setProperty('-webkit-mask-image', 'none', 'important');
+      el.style.setProperty('mask-image', 'none', 'important');
+    });
+    
+    document.querySelectorAll('.guest-lock-overlay').forEach(el => {
+      el.style.setProperty('display', 'none', 'important');
+    });
+    
+    if (window._applyLock) {
+      window._applyLock = function() {
+        document.querySelectorAll('.guest-lock-wrap.is-guest').forEach(el => el.classList.remove('is-guest'));
+      };
+    }
+  }
+  
+  forceUnlockCards();
+  setTimeout(forceUnlockCards, 200);
+  setTimeout(forceUnlockCards, 800);
+  setTimeout(forceUnlockCards, 2000);
+  setTimeout(forceUnlockCards, 3500);
+  setInterval(forceUnlockCards, 2000);
+  
+  if (window.MutationObserver) {
+    const observer = new MutationObserver(forceUnlockCards);
+    if (document.body) {
+      observer.observe(document.body, { attributes: true, childList: true, subtree: true, attributeFilter: ['class'] });
+    }
   }
 })();
 </script>
