@@ -2994,309 +2994,8 @@ html body:not(.auth-state-user):not(.auth-state-guest) [data-auth="guest"] {
   display: none !important;
 }
 </style>
-
-
-<style>
-/* ═══ PAYWALL MODULE — Reveal-then-Lock pattern ═══ */
-.paywall-locked-content {
-  display: none;
-}
-body.paywall-active .paywall-locked-content {
-  display: none;
-}
-body.paywall-unlocked .paywall-locked-content {
-  display: block;
-}
-body.paywall-unlocked .paywall-card-wrap {
-  display: none;
-}
-
-/* Fade out gradient di paragraf SEBELUM paywall */
-body.paywall-active .paywall-fade-tail {
-  position: relative;
-  max-height: 200px;
-  overflow: hidden;
-}
-body.paywall-active .paywall-fade-tail::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: linear-gradient(180deg, transparent 0%, #fafaf7 90%);
-  pointer-events: none;
-}
-
-/* Default: paywall card hidden — show only when paywall-active */
-.paywall-card-wrap {
-  display: none;
-}
-body.paywall-active .paywall-card-wrap {
-  display: block;
-  margin: 0 auto;
-  max-width: 720px;
-  position: relative;
-}
-
-.paywall-card {
-  background: linear-gradient(135deg, #FFFFFF 0%, #FBFAF6 100%);
-  border: 1px solid #DDE7E2;
-  border-radius: 16px;
-  box-shadow: 0 12px 48px rgba(20, 83, 45, 0.12);
-  padding: 36px 40px;
-  text-align: center;
-  margin: 32px auto 24px;
-  position: relative;
-}
-
-.paywall-card::before {
-  content: '';
-  position: absolute;
-  top: -50px;
-  left: 0;
-  right: 0;
-  height: 50px;
-  background: linear-gradient(180deg, transparent 0%, #fafaf7 100%);
-  pointer-events: none;
-}
-
-.pw-icon {
-  display: inline-flex;
-  width: 64px;
-  height: 64px;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(27,107,58,.12), rgba(27,107,58,.06));
-  border-radius: 50%;
-  font-size: 32px;
-  margin-bottom: 12px;
-}
-
-.pw-eyebrow {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  color: #5b8c3e;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-
-.pw-title {
-  font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif;
-  font-size: 30px;
-  font-weight: 700;
-  color: #14532d;
-  margin: 0 0 14px;
-  line-height: 1.2;
-}
-
-.pw-deck {
-  font-size: 14.5px;
-  color: #4b5563;
-  line-height: 1.65;
-  margin: 0 auto 20px;
-  max-width: 480px;
-}
-
-.pw-deck strong {
-  color: #1B6B3A;
-  font-weight: 700;
-}
-
-.pw-features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  justify-content: center;
-  margin: 18px 0 22px;
-  padding: 14px;
-  background: rgba(27,107,58,0.04);
-  border-radius: 10px;
-}
-
-.pw-feature {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12.5px;
-  color: #14532d;
-  font-weight: 600;
-}
-
-.pw-feature::before {
-  content: '✓';
-  display: inline-flex;
-  width: 18px;
-  height: 18px;
-  align-items: center;
-  justify-content: center;
-  background: #1B6B3A;
-  color: #fff;
-  border-radius: 50%;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.pw-price {
-  font-size: 13px;
-  color: #6b7280;
-  margin: 12px 0 18px;
-}
-.pw-price strong { color: #14532d; font-size: 14px; }
-
-.pw-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 320px;
-  margin: 0 auto;
-}
-
-.pw-btn-primary {
-  background: #1B6B3A;
-  color: #fff;
-  border: none;
-  padding: 14px 22px;
-  border-radius: 8px;
-  font-weight: 800;
-  font-size: 14px;
-  cursor: pointer;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  transition: all .2s;
-  box-shadow: 0 4px 12px rgba(27,107,58,.25);
-}
-.pw-btn-primary:hover {
-  background: #14532d;
-  box-shadow: 0 6px 16px rgba(27,107,58,.35);
-  transform: translateY(-1px);
-}
-
-.pw-btn-secondary {
-  background: #fff;
-  color: #1B6B3A;
-  border: 1.5px solid #1B6B3A;
-  padding: 13px 22px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 13.5px;
-  cursor: pointer;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}
-.pw-btn-secondary:hover { background: rgba(27,107,58,.05); }
-
-.pw-link {
-  font-size: 12.5px;
-  color: #6b7280;
-  margin-top: 12px;
-}
-.pw-link a { 
-  color: #1B6B3A; 
-  text-decoration: none; 
-  font-weight: 700;
-  border-bottom: 1px dashed rgba(27,107,58,.4);
-}
-
-.pw-divider {
-  margin: 22px 0 16px;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: #94a3b8;
-  text-transform: uppercase;
-  position: relative;
-}
-.pw-divider::before, .pw-divider::after {
-  content: '';
-  display: inline-block;
-  width: 80px;
-  height: 1px;
-  background: #e5e7eb;
-  vertical-align: middle;
-  margin: 0 12px;
-}
-
-.pw-related {
-  text-align: left;
-  margin-top: 14px;
-}
-
-.pw-related ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.pw-related li {
-  padding: 10px 14px;
-  margin-bottom: 6px;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  transition: all .15s;
-}
-.pw-related li:hover {
-  border-color: #1B6B3A;
-  background: rgba(27,107,58,.02);
-}
-
-.pw-related a {
-  color: #14532d;
-  text-decoration: none;
-  font-size: 13.5px;
-  font-weight: 600;
-  display: block;
-  line-height: 1.45;
-}
-
-.pw-related-cat {
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: #5b8c3e;
-  text-transform: uppercase;
-  margin-bottom: 3px;
-  display: block;
-}
-
-@media (max-width: 600px) {
-  .paywall-card { padding: 26px 22px; }
-  .pw-title { font-size: 24px; }
-  .pw-deck { font-size: 13.5px; }
-  .pw-features { padding: 10px; gap: 10px; }
-  .pw-feature { font-size: 11.5px; }
-}
-
-/* Anti-flash: jangan flash paywall sebelum auth resolved */
-body:not(.auth-state-user):not(.auth-state-guest) .paywall-card-wrap,
-body:not(.auth-state-user):not(.auth-state-guest) .paywall-locked-content {
-  /* During pending: hide both — content akan fully visible in pending */
-}
-body:not(.auth-state-user):not(.auth-state-guest).paywall-active .paywall-card-wrap {
-  visibility: hidden;
-}
-</style>
 </head>
 <body>
-<script>
-/* ═══ EARLY INIT: prevent FOUC ═══ */
-(function() {
-  function setGuestEarly() {
-    if (!document.body) return;
-    if (!document.body.classList.contains('auth-state-user') && !document.body.classList.contains('auth-state-guest')) {
-      document.body.classList.add('auth-state-guest');
-    }
-  }
-  if (document.body) {
-    setGuestEarly();
-  } else {
-    document.addEventListener('DOMContentLoaded', setGuestEarly, { once: true });
-  }
-})();
-</script>
 <nav class="nav-global" style="position:sticky;top:0;z-index:500;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-bottom:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,.04)">
   <div style="max-width:1280px;margin:0 auto;padding:0 18px;display:flex;align-items:center;height:54px;gap:18px;position:relative">
     <a href="index.html" style="display:flex;align-items:center;text-decoration:none;flex-shrink:0">
@@ -3306,7 +3005,7 @@ body:not(.auth-state-user):not(.auth-state-guest).paywall-active .paywall-card-w
       <a href="index.html" class="nav-link">Beranda</a>
       <a href="katalog.html" class="nav-link">Katalog</a>
       <a href="artikel.html" class="nav-link">Artikel</a>
-      <a href="artikel.html" class="nav-link">News</a>
+      <a href="news.html" class="nav-link">News</a>
       <a href="tentang.html" class="nav-link">Tentang</a>
       <a href="mitra.html" class="nav-link">Mitra</a>
       <a href="dashboard-mitra.html" class="nav-link nav-link-mitra-only" style="display:none">Dashboard Mitra</a>
@@ -3684,64 +3383,6 @@ body:not(.auth-state-user):not(.auth-state-guest).paywall-active .paywall-card-w
 </div>
 
 <!-- BAB I -->
-<div class="paywall-card-wrap">
-  <div class="paywall-card">
-    <div class="pw-icon">📖</div>
-    <div class="pw-eyebrow">Lanjut Membaca</div>
-    <h2 class="pw-title">Akses Penuh ke Artikel Ini</h2>
-    <p class="pw-deck">
-      Anda telah membaca <strong>preview</strong> artikel ini. Daftar sekarang untuk membaca <strong>analisis lengkap</strong> beserta seluruh corporate history, equity research, dan industry deep dives Avenir Research.
-    </p>
-    
-    <div class="pw-features">
-      <span class="pw-feature">2 Bulan Trial Gratis</span>
-      <span class="pw-feature">Akses Semua Riset</span>
-      <span class="pw-feature">Update Berkala</span>
-    </div>
-    
-    <p class="pw-price">Setelah trial: mulai <strong>Rp 69.000</strong> / bulan</p>
-    
-    <div class="pw-actions">
-      <button onclick="if(window.AUTH) AUTH.open('register'); else window.location.href='index.html'" class="pw-btn-primary">Mulai Trial 2 Bulan</button>
-      <button onclick="if(window.AUTH) AUTH.open('login'); else window.location.href='index.html'" class="pw-btn-secondary">Sudah Punya Akun</button>
-    </div>
-    
-    <div class="pw-link">Lihat detail paket di <a href="index.html">homepage</a></div>
-    
-    <div class="pw-divider">📚 Atau baca artikel lainnya</div>
-    
-    <div class="pw-related">
-      <ul>
-        <li>
-          <a href="artikel-pp19-revisi-royalti-minerba.html">
-            <span class="pw-related-cat">Regulasi · Minerba</span>
-            Bedah Mendalam Revisi PP 19/2025: Royalti Minerba Indonesia
-          </a>
-        </li>
-        <li>
-          <a href="artikel-cpo-investment-thesis.html">
-            <span class="pw-related-cat">Industry Thesis</span>
-            Investment Thesis: Crude Palm Oil (CPO) 2026
-          </a>
-        </li>
-        <li>
-          <a href="artikel-tpia-corporate-history.html">
-            <span class="pw-related-cat">Corporate History</span>
-            Chandra Asri: Sejarah Korporasi Hingga Pemain Regional
-          </a>
-        </li>
-        <li>
-          <a href="artikel-adro-corporate-history.html">
-            <span class="pw-related-cat">Corporate History</span>
-            Adaro: Dari Spanyol ke Bursa Jakarta
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<div class="paywall-locked-content">
 <h2 id="konteks">Bab I — Konteks: Indonesia &amp; Kekosongan Industri Petrokimia Hulu (1980-an)</h2>
 <h3>1.1 Paradoks Negara Kaya Minyak yang Miskin Petrokimia</h3>
 <p>Untuk memahami mengapa proyek Chandra Asri lahir dan mengapa ia begitu strategis hingga hari ini, kita perlu memahami kondisi industri petrokimia Indonesia pada awal 1980-an. Indonesia kala itu adalah paradoks yang mencolok: sebuah negara penghasil minyak, anggota OPEC sejak 1962, dengan produksi puncak mendekati 1,7 juta barel per hari pada awal 1970-an, namun hampir sepenuhnya bergantung pada impor untuk kebutuhan bahan baku petrokimia dasar.</p>
@@ -4234,8 +3875,6 @@ body:not(.auth-state-user):not(.auth-state-guest).paywall-active .paywall-card-w
   </div>
 </footer>
 
-
-</div>
 <script>
 /* ═══ SUPABASE AUTH MODULE v2 ═══ */
 const AUTH = {
@@ -4246,7 +3885,7 @@ const AUTH = {
     // Race getSession against 3s timeout — kalau gagal, fallback ke guest state
     try {
       const sessionPromise = _sb.auth.getSession();
-      const timeout = new Promise(res => setTimeout(() => res({ data: { session: null } }), 1500));
+      const timeout = new Promise(res => setTimeout(() => res({ data: { session: null } }), 3000));
       const { data: { session } } = await Promise.race([sessionPromise, timeout]);
       
       if (session?.user) {
@@ -4880,7 +4519,6 @@ if (document.body && !document.body.classList.contains('auth-state-user') && !do
 }
 </script>
 
-
 <script>
 /* ═══ AVENIR PAGE VISITS TRACKER ═══ */
 (function() {
@@ -4924,95 +4562,13 @@ if (document.body && !document.body.classList.contains('auth-state-user') && !do
   }
   
   // Delay 1 detik biar AUTH sempat resolve dulu (untuk dapat user_id kalau login)
-  if (document.readyState === 'complete') { if (window.requestIdleCallback) { requestIdleCallback(track, { timeout: 2000 }); } else { setTimeout(track, 1000); } } else {
-    window.addEventListener('load', () => { if (window.requestIdleCallback) { requestIdleCallback(track, { timeout: 2000 }); } else { setTimeout(track, 1000); } });
+  if (document.readyState === 'complete') {
+    setTimeout(track, 1000);
+  } else {
+    window.addEventListener('load', () => setTimeout(track, 1000));
   }
 })();
 </script>
 
-
-<script>
-/* ═══ PAYWALL ENGINE — Reveal-then-Lock ═══ */
-(function() {
-  'use strict';
-  
-  function getStatus() {
-    if (!window.AUTH) return 'pending';
-    if (!window.AUTH.currentUser) return 'guest';
-    
-    const profile = window.AUTH.profile || {};
-    const now = new Date();
-    
-    if (profile.subscription_until) {
-      try { if (new Date(profile.subscription_until) > now) return 'subscriber'; } catch (e) {}
-    }
-    
-    if (profile.trial_started_at) {
-      try {
-        const trialEnd = new Date(new Date(profile.trial_started_at).getTime() + 60*24*60*60*1000);
-        if (trialEnd > now) return 'trial';
-      } catch (e) {}
-    }
-    
-    if (profile.is_mitra) return 'mitra';
-    if (profile.is_admin) return 'admin';
-    
-    return 'expired';
-  }
-  
-  function applyPaywall() {
-    const status = getStatus();
-    
-    if (status === 'pending') {
-      // Don't decide yet — anti-flash. Content fully visible until resolved.
-      document.body.classList.remove('paywall-active', 'paywall-unlocked');
-      return;
-    }
-    
-    const isLocked = (status === 'guest' || status === 'expired');
-    
-    if (isLocked) {
-      document.body.classList.add('paywall-active');
-      document.body.classList.remove('paywall-unlocked');
-    } else {
-      document.body.classList.add('paywall-unlocked');
-      document.body.classList.remove('paywall-active');
-    }
-  }
-  
-  window._applyPaywall = applyPaywall;
-  
-  function hookAuth() {
-    if (window._sb && window._sb.auth) {
-      window._sb.auth.onAuthStateChange(async (event, session) => {
-        if (session?.user && window.AUTH) {
-          window.AUTH.currentUser = session.user;
-          if (typeof window.AUTH.loadProfile === 'function') {
-            try { await window.AUTH.loadProfile(); } catch (e) {}
-          }
-        } else if (window.AUTH) {
-          window.AUTH.currentUser = null;
-          window.AUTH.profile = null;
-        }
-        applyPaywall();
-      });
-      
-      setTimeout(applyPaywall, 1500);
-      return true;
-    }
-    return false;
-  }
-  
-  if (!hookAuth()) {
-    let attempts = 0;
-    const interval = setInterval(() => {
-      if (hookAuth() || ++attempts > 25) clearInterval(interval);
-    }, 200);
-  }
-  
-  setTimeout(applyPaywall, 500);
-  setTimeout(applyPaywall, 2500);
-})();
-</script>
 </body>
 </html>

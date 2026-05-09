@@ -6,17 +6,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avenir Research</title>
+<title>Admin Console — Avenir Research</title>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Avenir Research">
-<meta property="og:title" content="Tentang Avenir Research">
-<meta property="og:description" content="Avenir Research adalah platform riset ekuitas profesional oleh PT Avenir Fortuna Corporindo.">
+<meta property="og:title" content="Admin Console — Avenir Research">
+<meta property="og:description" content="Admin console Avenir Research">
 <meta property="og:url" content="https://avenirresearch.app/tentang">
 <meta property="og:image" content="https://avenirresearch.app/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tentang Avenir Research">
 <meta name="twitter:description" content="Avenir Research adalah platform riset ekuitas profesional oleh PT Avenir Fortuna Corporindo.">
-<meta name="description" content="Avenir Research adalah platform riset ekuitas profesional oleh PT Avenir Fortuna Corporindo.">
+<meta name="description" content="Admin console untuk mengelola mitra, user, dan statistik Avenir Research">
 
 <style>
 
@@ -2989,284 +2989,381 @@ html body:not(.auth-state-user):not(.auth-state-guest) [data-auth="guest"] {
   display: none !important;
 }
 
-/* ── DAFTAR MITRA TERVERIFIKASI ── */
-.mt-verified-section {
-  padding: 80px 24px;
-  background: linear-gradient(135deg, #f9fafb 0%, #f0fdf4 100%);
-  border-top: 1px solid rgba(27, 107, 58, 0.1);
-  border-bottom: 1px solid rgba(27, 107, 58, 0.1);
+/* ═══ ADMIN PAGE STYLES ═══ */
+.admin-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
 }
-.mt-verified-inner { max-width: 1100px; margin: 0 auto; }
-.mt-verified-header { text-align: center; margin-bottom: 48px; }
-.mt-verified-eyebrow {
-  display: inline-block;
+.admin-header {
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e5e7eb;
+}
+.admin-header-eyebrow {
   font-size: 11.5px;
   font-weight: 800;
   letter-spacing: 0.12em;
-  color: #1B6B3A;
+  color: var(--grn, #1B6B3A);
   text-transform: uppercase;
-  margin-bottom: 14px;
-  padding: 6px 14px;
-  background: rgba(27, 107, 58, 0.1);
-  border-radius: 50px;
+  margin-bottom: 8px;
 }
-.mt-verified-title {
+.admin-header-title {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 38px;
   font-weight: 600;
   color: #14532d;
-  margin: 0 0 12px;
+  margin: 0 0 6px;
   line-height: 1.2;
 }
-.mt-verified-sub {
-  font-size: 16px;
+.admin-header-sub {
+  font-size: 14px;
   color: #6b7280;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
 }
-.mt-verified-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 24px;
+.admin-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e5e7eb;
+  flex-wrap: wrap;
 }
-.mt-mitra-card {
-  background: #fff;
-  border: 1px solid rgba(27, 107, 58, 0.12);
-  border-radius: 12px;
-  padding: 24px 20px;
-  text-align: center;
+.admin-tab-btn {
+  background: none;
+  border: none;
+  padding: 12px 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
   transition: all 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-.mt-mitra-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(27, 107, 58, 0.12);
-  border-color: rgba(27, 107, 58, 0.3);
-}
-.mt-mitra-photo {
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  margin: 0 auto 14px;
-  object-fit: cover;
-  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-  border: 3px solid #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  display: block;
-}
-.mt-mitra-photo-fallback {
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  margin: 0 auto 14px;
-  background: linear-gradient(135deg, #1B6B3A 0%, #5B8C3E 100%);
-  color: #fff;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 32px;
-  font-weight: 600;
-  border: 3px solid #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  gap: 8px;
 }
-.mt-mitra-name {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: #14532d;
-  margin: 0 0 6px;
+.admin-tab-btn:hover { color: #14532d; }
+.admin-tab-btn.active {
+  color: var(--grn, #1B6B3A);
+  border-bottom-color: var(--grn, #1B6B3A);
 }
-.mt-mitra-cert {
-  display: inline-block;
+.admin-tab-count {
+  background: #f3f4f6;
+  color: #4b5563;
+  padding: 2px 8px;
+  border-radius: 10px;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  color: #1B6B3A;
-  background: rgba(27, 107, 58, 0.1);
-  padding: 4px 10px;
-  border-radius: 50px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
 }
-.mt-mitra-spes {
-  font-size: 12.5px;
-  color: #6b7280;
-  line-height: 1.5;
-  margin-top: 8px;
-}
-.mt-mitra-spes-tag {
-  display: inline-block;
-  font-size: 11px;
-  color: #4b5563;
-  background: #f3f4f6;
-  padding: 3px 9px;
-  border-radius: 4px;
-  margin: 2px 3px;
-}
-.mt-mitra-verified-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  font-size: 10px;
-  font-weight: 800;
-  color: #1B6B3A;
-  background: #d1fae5;
-  padding: 3px 8px;
-  border-radius: 50px;
-  letter-spacing: 0.05em;
-}
-.mt-verified-empty {
-  text-align: center;
-  padding: 60px 20px;
-  color: #9ca3af;
-  font-size: 15px;
-  font-style: italic;
-}
-.mt-verified-loading {
-  text-align: center;
-  padding: 40px 20px;
-  color: #9ca3af;
-  font-size: 14px;
-}
-@media (max-width: 720px) {
-  .mt-verified-section { padding: 56px 16px; }
-  .mt-verified-title { font-size: 28px; }
-  .mt-verified-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
-  .mt-mitra-card { padding: 20px 16px; }
-}
-
-/* ── Mitra Terverifikasi Section ── */
-.mt-verified-section {
-  padding: 80px 24px;
-  background: linear-gradient(180deg, #fafaf7 0%, #ffffff 100%);
-}
-.mt-verified-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.mt-verified-header {
-  text-align: center;
-  margin-bottom: 48px;
-}
-.mt-verified-eyebrow {
-  display: inline-block;
-  font-size: 11.5px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+.admin-tab-btn.active .admin-tab-count {
+  background: rgba(27,107,58,0.12);
   color: var(--grn, #1B6B3A);
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  padding: 6px 14px;
-  background: rgba(27, 107, 58, 0.08);
-  border-radius: 50px;
 }
-.mt-verified-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 42px;
-  font-weight: 600;
-  color: #14532d;
-  margin: 0 0 14px;
-  line-height: 1.2;
-}
-.mt-verified-sub {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #6b7280;
-  max-width: 640px;
-  margin: 0 auto;
-}
-.mt-verified-loading,
-.mt-verified-empty {
-  text-align: center;
-  padding: 48px 24px;
-  color: #6b7280;
-  font-size: 15px;
-}
-.mt-verified-grid {
+.admin-pane { display: none; }
+.admin-pane.active { display: block; }
+
+/* Stats grid */
+.admin-stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
 }
-.mt-verified-card {
+.admin-stat-card {
   background: #fff;
   border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  padding: 28px 22px;
-  text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 12px;
+  padding: 22px 20px;
 }
-.mt-verified-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(27, 107, 58, 0.12);
-  border-color: var(--grn, #1B6B3A);
+.admin-stat-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
-.mt-verified-photo {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1B6B3A 0%, #5B8C3E 100%);
-  margin: 0 auto 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-family: 'Cormorant Garamond', serif;
+.admin-stat-value {
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 36px;
   font-weight: 600;
-  overflow: hidden;
-  border: 3px solid #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  color: #14532d;
+  line-height: 1;
 }
-.mt-verified-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.admin-stat-sub {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
 }
-.mt-verified-name {
+
+/* Applicant cards */
+.admin-list { display: flex; flex-direction: column; gap: 14px; }
+.admin-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 22px 24px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.admin-card:hover {
+  border-color: var(--grn, #1B6B3A);
+  box-shadow: 0 4px 16px rgba(27,107,58,0.08);
+}
+.admin-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.admin-card-name {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 22px;
   font-weight: 600;
   color: #14532d;
-  margin: 0 0 6px;
-  line-height: 1.25;
+  margin: 0 0 4px;
 }
-.mt-verified-cert {
+.admin-card-email {
   font-size: 12px;
-  font-weight: 700;
-  color: var(--grn, #1B6B3A);
-  letter-spacing: 0.04em;
+  color: #6b7280;
+  font-family: 'JetBrains Mono', monospace;
+}
+.admin-card-badge {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 14px;
   padding: 4px 10px;
-  background: rgba(27, 107, 58, 0.08);
-  border-radius: 6px;
-  display: inline-block;
-}
-.mt-verified-spec {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  justify-content: center;
-}
-.mt-verified-spec-tag {
-  font-size: 11px;
-  padding: 4px 10px;
-  background: #f3f4f6;
-  color: #4b5563;
   border-radius: 50px;
-  font-weight: 500;
 }
+.admin-card-badge.pending { background: #fef9c3; color: #854d0e; }
+.admin-card-badge.approved { background: rgba(27,107,58,0.1); color: var(--grn, #1B6B3A); }
+.admin-card-badge.user { background: #dbeafe; color: #1e40af; }
+
+.admin-card-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+.admin-card-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.admin-card-meta-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #9ca3af;
+  letter-spacing: 0.06em;
+}
+.admin-card-meta-value {
+  font-size: 13px;
+  color: #374151;
+  word-break: break-word;
+}
+.admin-card-meta-value.bio { 
+  font-size: 12px; 
+  line-height: 1.6; 
+  color: #4b5563;
+  background: #fafaf7;
+  padding: 8px 10px;
+  border-radius: 6px;
+  grid-column: 1 / -1;
+}
+.admin-card-meta-value a { color: var(--grn, #1B6B3A); text-decoration: underline; word-break: break-all; }
+
+.admin-card-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  border-top: 1px solid #f3f4f6;
+}
+.admin-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.admin-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.admin-btn-approve { background: var(--grn, #1B6B3A); color: #fff; }
+.admin-btn-approve:hover:not(:disabled) { background: #155028; }
+.admin-btn-reject { background: #fef9c3; color: #854d0e; border-color: #fbbf24; }
+.admin-btn-reject:hover:not(:disabled) { background: #fef08a; }
+.admin-btn-edit { background: #fff; color: #2563eb; border-color: #93c5fd; }
+.admin-btn-edit:hover:not(:disabled) { background: #eff6ff; }
+.admin-btn-delete { background: #fff; color: #dc2626; border-color: #fca5a5; }
+.admin-btn-delete:hover:not(:disabled) { background: #fef2f2; }
+.admin-btn-cabut { background: #fff; color: #d97706; border-color: #fbbf24; }
+
+.admin-loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+  font-size: 14px;
+}
+.admin-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+  background: #fafaf7;
+  border-radius: 12px;
+  border: 2px dashed #e5e7eb;
+}
+.admin-empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+.admin-empty-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #14532d;
+  margin-bottom: 6px;
+}
+.admin-empty-sub { font-size: 13.5px; color: #6b7280; }
+
+/* Login required state */
+.admin-login-required {
+  max-width: 520px;
+  margin: 80px auto;
+  padding: 48px 32px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  text-align: center;
+}
+.admin-not-admin {
+  max-width: 520px;
+  margin: 80px auto;
+  padding: 48px 32px;
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  border-radius: 16px;
+  text-align: center;
+}
+
+/* Edit modal */
+.admin-modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.admin-modal-backdrop.open { display: flex; }
+.admin-modal {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px;
+}
+.admin-modal h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  margin: 0 0 6px;
+  color: #14532d;
+}
+.admin-modal-fg { margin-bottom: 16px; }
+.admin-modal-fg label { 
+  display: block; 
+  font-size: 11.5px; 
+  font-weight: 800; 
+  text-transform: uppercase; 
+  letter-spacing: 0.06em;
+  color: #4b5563; 
+  margin-bottom: 6px; 
+}
+.admin-modal-fg input,
+.admin-modal-fg textarea,
+.admin-modal-fg select {
+  width: 100%; 
+  padding: 10px 12px; 
+  border: 1px solid #d1d5db; 
+  border-radius: 8px; 
+  font-size: 14px;
+  font-family: inherit;
+}
+.admin-modal-fg textarea { min-height: 80px; resize: vertical; }
+.admin-modal-actions { display: flex; gap: 8px; margin-top: 24px; justify-content: flex-end; }
+
 @media (max-width: 720px) {
-  .mt-verified-section { padding: 56px 20px; }
-  .mt-verified-title { font-size: 32px; }
-  .mt-verified-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .admin-header-title { font-size: 30px; }
+  .admin-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .admin-stat-value { font-size: 28px; }
+  .admin-card-actions { flex-direction: column; align-items: stretch; }
+  .admin-btn { width: 100%; justify-content: center; }
+}
+
+/* ═══ SKELETON LOADER ═══ */
+.admin-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.skel-card {
+  height: 220px;
+  background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%);
+  background-size: 200% 100%;
+  animation: skel-shimmer 1.5s infinite;
+  border-radius: 12px;
+}
+@keyframes skel-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.admin-checking-wrap {
+  text-align: center;
+  padding: 80px 20px;
+}
+.admin-checking-icon {
+  font-size: 56px;
+  margin-bottom: 18px;
+  display: inline-block;
+  animation: admin-pulse 1.5s infinite;
+}
+@keyframes admin-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.95); }
+}
+.admin-checking-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #14532d;
+  margin: 0 0 6px;
+}
+.admin-checking-status {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* ═══ ANTI-FLASH: Initial pending state hide BOTH Sign In and User chip ═══ */
+body.auth-pending [data-auth="user"],
+body.auth-pending [data-auth="guest"] {
+  display: none !important;
+}
+body.auth-pending .nav-mobile-auth,
+body.auth-pending .nav-mobile-login {
+  display: none !important;
 }
 </style>
 </head>
-<body>
+<body class="auth-pending">
 <nav class="nav-global" style="position:sticky;top:0;z-index:500;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-bottom:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,.04)">
   <div style="max-width:1280px;margin:0 auto;padding:0 18px;display:flex;align-items:center;height:54px;gap:18px;position:relative">
     <a href="index.html" style="display:flex;align-items:center;text-decoration:none;flex-shrink:0">
@@ -3509,144 +3606,127 @@ html body:not(.auth-state-user):not(.auth-state-guest) [data-auth="guest"] {
 
  </div>
 </div>
-<div id="page-mitra" class="page" style="display:block">
-<style>
-.mt-wrap { max-width: 980px; margin: 0 auto; padding: 60px 24px 80px; }
-.mt-hero { text-align: center; margin-bottom: 56px; }
-.mt-hero-eyebrow { display: inline-block; background: var(--grn-gl); color: var(--grn-d); font-size: 11px; font-weight: 700; letter-spacing: .14em; padding: 6px 14px; border-radius: 4px; margin-bottom: 18px; text-transform: uppercase; }
-.mt-hero h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(32px, 5vw, 50px); font-weight: 600; line-height: 1.1; color: var(--t); margin: 0 0 18px; }
-.mt-hero h1 .hl { color: var(--grn); }
-.mt-hero p { font-size: 16px; line-height: 1.7; color: var(--t2); max-width: 700px; margin: 0 auto; }
-.mt-formula { background: linear-gradient(135deg, #fff 0%, #f9fbfa 100%); border: 2px solid var(--grn); border-radius: 14px; padding: 28px 32px; margin-bottom: 48px; box-shadow: var(--shadow-md); }
-.mt-formula-h { font-size: 11px; font-weight: 700; letter-spacing: .14em; color: var(--grn-d); text-transform: uppercase; margin-bottom: 14px; }
-.mt-formula-eq { font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.9; color: var(--t); padding: 16px 18px; background: var(--grn-gl); border-radius: 8px; margin-bottom: 16px; }
-.mt-formula-eq strong { color: var(--grn-d); font-weight: 700; }
-.mt-formula-explain { font-size: 13.5px; line-height: 1.65; color: var(--t2); }
-.mt-section-h { font-size: 11px; font-weight: 700; letter-spacing: .14em; color: var(--t2); text-transform: uppercase; margin: 0 0 22px; text-align: center; }
-.mt-section-h:before, .mt-section-h:after { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--bd); vertical-align: middle; margin: 0 12px; }
-.mt-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 56px; }
-.mt-step { background: #fff; border: 1px solid var(--bd); border-radius: 12px; padding: 22px 20px; }
-.mt-step-num { display: inline-block; background: var(--t); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; width: 28px; height: 28px; border-radius: 6px; text-align: center; line-height: 28px; margin-bottom: 12px; }
-.mt-step h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 19px; font-weight: 600; color: var(--t); margin: 0 0 8px; line-height: 1.3; }
-.mt-step p { font-size: 13px; line-height: 1.6; color: var(--t2); margin: 0; }
-.mt-example { background: #fff; border: 1px solid var(--bd); border-radius: 14px; padding: 32px 36px; margin-bottom: 48px; }
-.mt-example h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 24px; font-weight: 600; color: var(--t); margin: 0 0 20px; }
-.mt-example p { font-size: 13.5px; line-height: 1.65; color: var(--t2); margin: 0 0 18px; }
-.mt-example p strong { color: var(--t); font-weight: 600; }
-.mt-table-wrap { overflow-x: auto; }
-.mt-example-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 540px; }
-.mt-example-table th { text-align: left; padding: 10px 12px; background: var(--bg); border-bottom: 1px solid var(--bd); font-size: 10.5px; font-weight: 700; letter-spacing: .06em; color: var(--t2); text-transform: uppercase; }
-.mt-example-table td { padding: 10px 12px; border-bottom: 1px solid var(--bd); }
-.mt-example-table .mt-internal td { color: var(--t3); font-style: italic; }
-.mt-example-table .mt-pct { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--grn-d); text-align: right; }
-.mt-example-table .mt-money { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--grn-d); text-align: right; }
-.mt-internal .mt-pct, .mt-internal .mt-money { color: var(--t3); }
-.mt-example-note { font-size: 12px; color: var(--t3); line-height: 1.6; margin-top: 14px; padding: 12px 14px; background: var(--bg); border-radius: 6px; }
-.mt-example-note strong { color: var(--t); }
-.mt-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 56px; }
-.mt-feat { background: #fff; border: 1px solid var(--bd); border-radius: 12px; padding: 22px 20px; }
-.mt-feat-icon { font-size: 24px; margin-bottom: 10px; }
-.mt-feat h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 18px; font-weight: 600; color: var(--t); margin: 0 0 6px; }
-.mt-feat p { font-size: 12.5px; line-height: 1.6; color: var(--t2); margin: 0; }
-.mt-cta-box { text-align: center; padding: 48px 32px; background: linear-gradient(135deg, #18211D 0%, #2d3a33 100%); border-radius: 16px; margin-bottom: 32px; }
-.mt-cta-box h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(26px, 4vw, 36px); font-weight: 600; color: #fff; margin: 0 0 12px; }
-.mt-cta-box p { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.75); margin: 0 0 24px; max-width: 540px; margin-left: auto; margin-right: auto; }
-.mt-cta-btn { display: inline-block; background: var(--grn); color: #fff; padding: 14px 32px; border-radius: 10px; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; transition: all .2s; box-shadow: 0 4px 14px rgba(27,107,58,.4); }
-.mt-cta-btn:hover { background: var(--grn-l); transform: translateY(-2px); }
-.mt-faq { background: #fff; border: 1px solid var(--bd); border-radius: 14px; padding: 32px 36px; }
-.mt-faq h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 24px; font-weight: 600; color: var(--t); margin: 0 0 18px; }
-.mt-q { padding: 14px 0; border-bottom: 1px solid var(--bd); }
-.mt-q:last-child { border-bottom: none; }
-.mt-q-h { font-size: 14px; font-weight: 700; color: var(--t); margin: 0 0 6px; }
-.mt-q-a { font-size: 13.5px; line-height: 1.65; color: var(--t2); margin: 0; }
-.mt-q-a strong { color: var(--t); font-weight: 600; }
-@media (max-width: 720px) {
-  .mt-steps, .mt-features { grid-template-columns: 1fr 1fr; }
-  .mt-formula, .mt-example, .mt-faq { padding: 22px 22px; }
-  .mt-formula-eq { font-size: 12px; }
-}
-@media (max-width: 480px) {
-  .mt-steps, .mt-features { grid-template-columns: 1fr; }
-}
-</style>
-<div class="mt-wrap">
-  <div class="mt-hero">
-    <div class="mt-hero-eyebrow">◆ PROGRAM MITRA ANALIS</div>
-    <h1>Tulis Riset, Bagi <span class="hl">40% Revenue</span> dari Subscription</h1>
-    <p>Bergabunglah sebagai Mitra Analis Avenir Research. Submit riset Anda, dan dapatkan bagi hasil bulanan dari pool subscription — dibagi proporsional berdasarkan jumlah views ke setiap riset.</p>
-  </div>
-  <div class="mt-formula">
-    <div class="mt-formula-h">💰 Model Bagi Hasil</div>
-    <div class="mt-formula-eq">
-      <strong>Pool Mitra</strong> = 40% × Total Revenue Subscription Bulanan<br>
-      <strong>Bagian Mitra X</strong> = (Views Riset X ÷ Total Views Semua Riset) × Pool Mitra
+<div id="page-admin" class="page" style="display:block">
+  <div class="admin-container">
+    
+    <!-- Login required state -->
+    <div id="admin-login-required" class="admin-login-required" style="display:none">
+      <div style="font-size:48px;margin-bottom:12px">🔒</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#14532d;margin:0 0 12px">Login Diperlukan</h2>
+      <p style="color:#6b7280;font-size:14px;line-height:1.6;margin-bottom:24px">Halaman admin hanya bisa diakses oleh admin Avenir Research yang terverifikasi. Silakan login dulu dengan akun admin.</p>
+      <button onclick="AUTH.open('login')" class="nav-btn-primary" style="background:var(--grn,#1B6B3A);color:#fff;padding:12px 28px;border:none;border-radius:50px;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer">Login Sekarang</button>
     </div>
-    <p class="mt-formula-explain">Setiap akhir bulan, 40% dari total subscription revenue dialokasikan ke pool mitra. Pool tersebut dibagi <strong>proporsional</strong> berdasarkan jumlah views ke setiap riset di bulan tersebut. Riset internal Avenir juga ikut "kompetisi views" — semakin banyak riset Anda dibaca dibanding semua riset lain, semakin besar bagian Anda. Pembayaran via transfer bank tiap awal bulan berikutnya.</p>
-  </div>
-  <div class="mt-section-h">CARA BERGABUNG &amp; WORKFLOW</div>
-  <div class="mt-steps">
-    <div class="mt-step"><div class="mt-step-num">01</div><h3>Daftar &amp; Verifikasi</h3><p>Submit form pendaftaran lengkap dengan sertifikasi (CFA, WPPE, WPEE, atau setara) dan link portfolio. Tim editorial review dalam 5–7 hari kerja.</p></div>
-    <div class="mt-step"><div class="mt-step-num">02</div><h3>Tulis &amp; Submit</h3><p>Tulis riset menggunakan template Avenir Research. Kirim file (Word/PDF) via email ke admin: <strong>mitra@avenirfortuna.com</strong></p></div>
-    <div class="mt-step"><div class="mt-step-num">03</div><h3>Review Editorial</h3><p>Tim editorial Avenir review metodologi, data, dan format. Mitra revisi sesuai feedback. Setelah approved, riset dijadwalkan deploy.</p></div>
-    <div class="mt-step"><div class="mt-step-num">04</div><h3>Avenir Deploy</h3><p>Tim Avenir HTML-kan riset dan publikasikan ke website dengan byline mitra. Anda track performa di dashboard mitra.</p></div>
-  </div>
-  <div class="mt-example">
-    <h2>📊 Contoh Perhitungan Pendapatan Bulanan</h2>
-    <p>Asumsi: <strong>100 subscriber bulanan</strong> × Rp 69.000 = <strong>Rp 6.900.000</strong> total revenue → Pool mitra (40%) = <strong>Rp 2.760.000</strong>. Total views semua riset di bulan tersebut: <strong>1.000 views</strong>.</p>
-    <div class="mt-table-wrap">
-    <table class="mt-example-table">
-      <thead><tr><th>Riset</th><th>Penulis</th><th>Views</th><th class="mt-pct">%</th><th class="mt-money">Bagian</th></tr></thead>
-      <tbody>
-        <tr><td>BBCA Q1 Review</td><td>Budi (Mitra)</td><td>200</td><td class="mt-pct">20%</td><td class="mt-money">Rp 552.000</td></tr>
-        <tr><td>UNVR Margin Outlook</td><td>Andi (Mitra)</td><td>100</td><td class="mt-pct">10%</td><td class="mt-money">Rp 276.000</td></tr>
-        <tr><td>ASII Diversification</td><td>Citra (Mitra)</td><td>50</td><td class="mt-pct">5%</td><td class="mt-money">Rp 138.000</td></tr>
-        <tr class="mt-internal"><td>ADRO Investment Thesis</td><td>Tim Avenir (internal)</td><td>400</td><td class="mt-pct">40%</td><td class="mt-money">Rp 1.104.000</td></tr>
-        <tr class="mt-internal"><td>BBRI Q4 Update</td><td>Tim Avenir (internal)</td><td>250</td><td class="mt-pct">25%</td><td class="mt-money">Rp 690.000</td></tr>
-      </tbody>
-    </table>
+    
+    <!-- Not admin state -->
+    <div id="admin-not-admin" class="admin-not-admin" style="display:none">
+      <div style="font-size:48px;margin-bottom:12px">⛔</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#991b1b;margin:0 0 12px">Akses Ditolak</h2>
+      <p style="color:#7f1d1d;font-size:14px;line-height:1.6">Akun Anda <span id="admin-not-admin-email" style="font-family:monospace;font-weight:700">-</span> tidak memiliki akses admin.<br><br>Hubungi admin Avenir Research jika Anda merasa ini kesalahan.</p>
+      <button onclick="AUTH.logout()" style="margin-top:20px;background:transparent;color:#991b1b;padding:10px 24px;border:1px solid #dc2626;border-radius:50px;font-weight:700;font-size:12px;cursor:pointer">Keluar</button>
     </div>
-    <p class="mt-example-note">Catatan: Riset internal Avenir ikut perhitungan views, tapi bagian-nya dialokasikan untuk operasional platform (kurasi editorial, infrastruktur, marketing). Total mitra di contoh ini menerima <strong>Rp 966.000</strong> (35%) dari total pool, dengan distribusi sesuai proporsi views masing-masing.</p>
-  </div>
-  <div class="mt-section-h">KENAPA JADI MITRA AVENIR?</div>
-  <div class="mt-features">
-    <div class="mt-feat"><div class="mt-feat-icon">📈</div><h3>Skala Audience</h3><p>Riset Anda dibaca oleh komunitas analis dan investor serius yang berlangganan platform.</p></div>
-    <div class="mt-feat"><div class="mt-feat-icon">🎯</div><h3>Fokus Analisis</h3><p>Anda fokus tulis riset bagus. Tim Avenir handle deploy, editing, hosting, dan retention.</p></div>
-    <div class="mt-feat"><div class="mt-feat-icon">📊</div><h3>Dashboard Real-time</h3><p>Pantau views per riset, estimasi pendapatan bulanan, dan tren performa di dashboard mitra.</p></div>
-    <div class="mt-feat"><div class="mt-feat-icon">🤝</div><h3>Editorial Support</h3><p>Tim editor kasih feedback metodologi dan format. Riset Anda jadi lebih tajam.</p></div>
-    <div class="mt-feat"><div class="mt-feat-icon">🏷️</div><h3>Byline &amp; Brand</h3><p>Setiap riset Anda tampil dengan nama, foto, dan bio Anda. Bangun personal brand.</p></div>
-    <div class="mt-feat"><div class="mt-feat-icon">⚖️</div><h3>Transparan &amp; Fair</h3><p>Formula publik. Setiap views terlacak. Pembayaran rutin dengan rincian lengkap.</p></div>
+    
+    <!-- Loading state -->
+    <div id="admin-checking" class="admin-checking-wrap">
+      <div class="admin-checking-icon">🛡️</div>
+      <div class="admin-checking-title">Memuat Admin Console</div>
+      <div class="admin-checking-status" id="admin-checking-status">Mengecek session...</div>
+    </div>
+    
+    <!-- Admin content -->
+    <div id="admin-content" style="display:none">
+      <div class="admin-header">
+        <div class="admin-header-eyebrow">⚙️ Admin Console</div>
+        <h1 class="admin-header-title">Halo, <span id="admin-name">Admin</span> 👋</h1>
+        <p class="admin-header-sub">Kelola pendaftaran mitra, user subscriber, dan monitoring Avenir Research.</p>
+      </div>
+      
+      <div class="admin-tabs">
+        <button class="admin-tab-btn active" data-tab="pending" onclick="Admin.switchTab('pending')">
+          📥 Pending Mitra <span class="admin-tab-count" id="admin-count-pending">0</span>
+        </button>
+        <button class="admin-tab-btn" data-tab="mitra" onclick="Admin.switchTab('mitra')">
+          ✅ Mitra Aktif <span class="admin-tab-count" id="admin-count-mitra">0</span>
+        </button>
+        <button class="admin-tab-btn" data-tab="user" onclick="Admin.switchTab('user')">
+          👤 User Subscriber <span class="admin-tab-count" id="admin-count-user">0</span>
+        </button>
+        <button class="admin-tab-btn" data-tab="stats" onclick="Admin.switchTab('stats')">
+          📊 Statistik
+        </button>
+      </div>
+      
+      <!-- PANE: Pending -->
+      <div id="admin-pane-pending" class="admin-pane active">
+        <div id="admin-pending-list" class="admin-list">
+          <div class="admin-skeleton"><div class="skel-card"></div><div class="skel-card"></div></div>
+        </div>
+      </div>
+      
+      <!-- PANE: Mitra Aktif -->
+      <div id="admin-pane-mitra" class="admin-pane">
+        <div id="admin-mitra-list" class="admin-list">
+          <div class="admin-skeleton"><div class="skel-card"></div><div class="skel-card"></div></div>
+        </div>
+      </div>
+      
+      <!-- PANE: User Subscriber -->
+      <div id="admin-pane-user" class="admin-pane">
+        <div id="admin-user-list" class="admin-list">
+          <div class="admin-skeleton"><div class="skel-card"></div><div class="skel-card"></div></div>
+        </div>
+      </div>
+      
+      <!-- PANE: Statistik -->
+      <div id="admin-pane-stats" class="admin-pane">
+        <div id="admin-stats-content">
+          <div class="admin-skeleton"><div class="skel-card"></div></div>
+        </div>
+      </div>
+    </div>
+    
   </div>
   
-<!-- DAFTAR MITRA TERVERIFIKASI -->
-<section class="mt-verified-section">
-  <div class="mt-verified-inner">
-    <div class="mt-verified-header">
-      <span class="mt-verified-eyebrow">✓ Mitra Terverifikasi</span>
-      <h2 class="mt-verified-title">Tim Analis Avenir Research</h2>
-      <p class="mt-verified-sub">Para analis profesional yang sudah lolos verifikasi tim editorial dan aktif menulis riset di Avenir Research.</p>
+  <!-- Edit Modal -->
+  <div id="admin-edit-modal" class="admin-modal-backdrop" onclick="if(event.target===this)Admin.closeEdit()">
+    <div class="admin-modal">
+      <h3>Edit Profil Mitra</h3>
+      <p style="color:#6b7280;font-size:13px;margin-bottom:20px">Update informasi profil. Klik <strong>Simpan</strong> untuk menyimpan perubahan.</p>
+      
+      <input type="hidden" id="edit-id">
+      
+      <div class="admin-modal-fg"><label>Nama Depan</label><input type="text" id="edit-nama-depan"></div>
+      <div class="admin-modal-fg"><label>Nama Belakang</label><input type="text" id="edit-nama-belakang"></div>
+      <div class="admin-modal-fg"><label>Sertifikasi</label><input type="text" id="edit-sertifikasi" placeholder="CFA Charterholder, WMI, dll"></div>
+      <div class="admin-modal-fg"><label>Spesialisasi (pisahkan dengan koma)</label><input type="text" id="edit-spesialisasi" placeholder="Banking, Finance, Macro"></div>
+      <div class="admin-modal-fg"><label>Bio</label><textarea id="edit-bio" maxlength="300"></textarea></div>
+      <div class="admin-modal-fg"><label>Link Portfolio</label><input type="url" id="edit-portfolio"></div>
+      <div class="admin-modal-fg"><label>No HP</label><input type="text" id="edit-hp"></div>
+      <div class="admin-modal-fg">
+        <label>Foto Profil</label>
+        <div style="display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:8px">
+          <div id="edit-foto-current-circle" style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#1B6B3A 0%,#5B8C3E 100%);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;overflow:hidden;flex-shrink:0;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.08)">
+            <span id="edit-foto-initial">?</span>
+            <img id="edit-foto-current-img" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover">
+          </div>
+          <div style="flex:1;min-width:200px">
+            <input type="file" id="edit-foto-input" accept="image/jpeg,image/png,image/webp,image/jpg" style="display:none">
+            <button type="button" onclick="document.getElementById('edit-foto-input').click()" style="background:#fff;color:#1B6B3A;padding:8px 14px;border:1px solid #1B6B3A;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;display:block;width:100%">📷 Pilih Foto Baru</button>
+            <button type="button" id="edit-foto-delete-btn" onclick="Admin.deleteFotoFromAdmin()" style="display:none;margin-top:6px;background:transparent;color:#dc2626;border:none;font-size:11px;cursor:pointer;text-decoration:underline;padding:4px 0">🗑️ Hapus foto</button>
+            <div id="edit-foto-msg" style="display:none;margin-top:8px;padding:8px;border-radius:6px;font-size:11.5px"></div>
+          </div>
+        </div>
+        <div style="font-size:11.5px;color:#9ca3af;margin-top:4px">JPG/PNG/WEBP, max 2 MB. Auto-upload setelah pilih file.</div>
+      </div>
+      
+      <div id="edit-msg" style="padding:10px;border-radius:6px;font-size:13px;display:none;margin-top:12px"></div>
+      
+      <div class="admin-modal-actions">
+        <button class="admin-btn admin-btn-edit" onclick="Admin.closeEdit()" style="background:#fff;color:#6b7280;border-color:#d1d5db">Batal</button>
+        <button class="admin-btn admin-btn-approve" id="edit-save-btn" onclick="Admin.saveEdit()">Simpan</button>
+      </div>
     </div>
-    <div id="mt-verified-loading" class="mt-verified-loading">⏳ Memuat daftar mitra...</div>
-    <div id="mt-verified-grid" class="mt-verified-grid" style="display:none"></div>
-    <div id="mt-verified-empty" class="mt-verified-empty" style="display:none">Belum ada mitra terverifikasi yang ditampilkan. Jadilah yang pertama bergabung sebagai mitra Avenir Research!</div>
-  </div>
-</section>
-
-<div class="mt-cta-box">
-    <h2>Siap Bergabung sebagai Mitra?</h2>
-    <p>Daftarkan diri Anda hari ini. Tim editorial akan review aplikasi dan menghubungi Anda dalam 5-7 hari kerja.</p>
-    <a href="daftar-mitra.html" class="mt-cta-btn">Daftar Sekarang →</a>
-  </div>
-  <div class="mt-faq">
-    <h2>❓ Pertanyaan Umum</h2>
-    <div class="mt-q"><h3 class="mt-q-h">Apakah ada minimum jumlah riset per bulan?</h3><p class="mt-q-a">Tidak ada minimum. Anda bebas tulis berapapun. Tapi makin banyak riset (dengan kualitas konsisten), makin besar potensi views Anda.</p></div>
-    <div class="mt-q"><h3 class="mt-q-h">Bagaimana jika subscription belum aktif (masih fase trial)?</h3><p class="mt-q-a">Saat ini Avenir Research dalam fase peluncuran awal dengan trial 2 bulan untuk semua user. Pembayaran ke mitra dimulai setelah subscription berbayar aktif. Selama trial, views tetap tercatat dan akan dikonversi pendapatan setelah subscription jalan.</p></div>
-    <div class="mt-q"><h3 class="mt-q-h">Apakah saya bisa repost riset di blog/LinkedIn pribadi?</h3><p class="mt-q-a">Riset eksklusif untuk Avenir Research selama 30 hari. Setelah itu, Anda boleh repost dengan attribusi "Pertama dipublikasikan di Avenir Research".</p></div>
-    <div class="mt-q"><h3 class="mt-q-h">Bagaimana cara saya track penghasilan saya?</h3><p class="mt-q-a">Setelah disetujui jadi mitra, Anda otomatis dapat akses ke <strong>Dashboard Mitra</strong> di menu nav. Di sana Anda bisa lihat real-time: total views bulan ini, estimasi pendapatan, dan tren views.</p></div>
-    <div class="mt-q"><h3 class="mt-q-h">Apakah ada training atau onboarding?</h3><p class="mt-q-a">Setelah disetujui, Anda akan dapat akses ke template riset standar Avenir, editorial guidelines (30+ checklist), dan onboarding session 1-on-1 dengan tim editor.</p></div>
   </div>
 </div>
-</div>
-<div class="footer-spacer" style="clear:both;height:0;width:100%"></div>
 <footer style="display:block!important;visibility:visible!important;background:#0f172a;color:#94a3b8;padding:48px 24px 24px;margin-top:80px">
   <div style="max-width:1280px;margin:0 auto">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;margin-bottom:32px">
@@ -3809,6 +3889,9 @@ const AUTH = {
 
   // Update semua UI setelah login/logout
   async refreshUI() {
+    // Remove pending class once AUTH has resolved (state determined)
+    document.body.classList.remove('auth-pending');
+
     const user = AUTH.currentUser;
 
     document.body.classList.toggle('auth-state-user', !!user);
@@ -4287,262 +4370,828 @@ if (document.body && !document.body.classList.contains('auth-state-user') && !do
 </script>
 
 <script>
-// Auto-redirect mitra (yang sudah login & is_mitra=true) ke dashboard
-(function() {
-  let redirected = false;
+/* ═══ ADMIN MODULE ═══ */
+const Admin = {
+  currentTab: 'pending',
+  isReady: false,
   
-  async function checkAndRedirect() {
-    if (redirected) return;
-    if (!window.AUTH || !window._sb) return;
-    if (!window.AUTH.currentUser) return;
+  async init() {
+    const checkingEl = document.getElementById('admin-checking');
+    const loginEl = document.getElementById('admin-login-required');
+    const notAdminEl = document.getElementById('admin-not-admin');
+    const contentEl = document.getElementById('admin-content');
+    const statusEl = document.getElementById('admin-checking-status');
+    const setStatus = msg => { if (statusEl) statusEl.textContent = msg; };
     
-    // Wait for profile load (max 4 detik)
-    let attempts = 0;
-    while (!window.AUTH.profile && attempts < 20) {
-      await new Promise(r => setTimeout(r, 200));
-      attempts++;
-    }
+    // RESET semua state UI dulu — penting saat re-init (misal setelah login)
+    if (checkingEl) checkingEl.style.display = 'block';
+    if (loginEl) loginEl.style.display = 'none';
+    if (notAdminEl) notAdminEl.style.display = 'none';
+    if (contentEl) contentEl.style.display = 'none';
+    setStatus('Mengecek session...');
     
-    if (window.AUTH.profile && window.AUTH.profile.is_mitra === true) {
-      redirected = true;
-      window.location.href = 'dashboard-mitra.html';
-    }
-  }
-  
-  // Check on initial load (after AUTH.init)
-  function trySetup() {
-    if (window._sb && window._sb.auth) {
-      // Initial check
-      setTimeout(checkAndRedirect, 1500);
-      
-      // Also re-check on auth state change (kalau user login sambil di halaman /mitra)
-      window._sb.auth.onAuthStateChange(() => {
-        setTimeout(checkAndRedirect, 800);
-      });
-    } else {
-      setTimeout(trySetup, 500);
-    }
-  }
-  
-  trySetup();
-})();
-</script>
-
-
-<script>
-/* ═══ FETCH & RENDER DAFTAR MITRA TERVERIFIKASI ═══ */
-(async function loadVerifiedMitra() {
-  const loadingEl = document.getElementById('mt-verified-loading');
-  const gridEl = document.getElementById('mt-verified-grid');
-  const emptyEl = document.getElementById('mt-verified-empty');
-  
-  if (!loadingEl || !gridEl || !emptyEl) return;
-  
-  // Wait for _sb to be ready
-  let tries = 0;
-  while (typeof window._sb === 'undefined' && tries < 30) {
-    await new Promise(r => setTimeout(r, 100));
-    tries++;
-  }
-  if (typeof window._sb === 'undefined') {
-    loadingEl.textContent = 'Tidak dapat memuat — koneksi Supabase tidak tersedia.';
-    return;
-  }
-  
-  try {
-    // Fetch dari view public_mitra_list (HANYA field non-sensitif)
-    const { data, error } = await window._sb
-      .from('public_mitra_list')
-      .select('id, nama_depan, nama_belakang, sertifikasi, spesialisasi, foto_url')
-      .order('nama_depan', { ascending: true });
+    let user = null;
+    let profile = null;
     
-    if (error) {
-      console.warn('Fetch mitra error:', error);
-      loadingEl.textContent = 'Tidak dapat memuat daftar mitra saat ini.';
-      return;
-    }
-    
-    loadingEl.style.display = 'none';
-    
-    if (!data || data.length === 0) {
-      emptyEl.style.display = 'block';
-      return;
-    }
-    
-    // Render mitra cards
-    const cards = data.map(m => {
-      const namaLengkap = (m.nama_depan || '') + ' ' + (m.nama_belakang || '');
-      const initial = (m.nama_depan?.[0] || '?').toUpperCase();
-      
-      // Photo: kalau ada foto_url, tampilkan image; kalau tidak, fallback initial
-      const photoHtml = m.foto_url 
-        ? `<img class="mt-mitra-photo" src="${m.foto_url}" alt="${namaLengkap.trim()}" onerror="this.outerHTML='<div class=&quot;mt-mitra-photo-fallback&quot;>${initial}</div>'">` 
-        : `<div class="mt-mitra-photo-fallback">${initial}</div>`;
-      
-      // Spesialisasi tags
-      const spesHtml = (m.spesialisasi && m.spesialisasi.length > 0)
-        ? m.spesialisasi.slice(0, 4).map(s => `<span class="mt-mitra-spes-tag">${s}</span>`).join('')
-        : '<span style="font-size:11px;color:#9ca3af;font-style:italic">Multi-sektor</span>';
-      
-      return `
-        <div class="mt-mitra-card">
-          <div class="mt-mitra-verified-badge">✓ Verified</div>
-          ${photoHtml}
-          <div class="mt-mitra-name">${namaLengkap.trim() || 'Mitra Anonim'}</div>
-          ${m.sertifikasi ? `<div class="mt-mitra-cert">${m.sertifikasi}</div>` : ''}
-          <div class="mt-mitra-spes">${spesHtml}</div>
-        </div>
-      `;
-    }).join('');
-    
-    gridEl.innerHTML = cards;
-    gridEl.style.display = 'grid';
-    
-  } catch (e) {
-    console.warn('Mitra list error:', e);
-    loadingEl.textContent = 'Terjadi kesalahan memuat daftar mitra.';
-  }
-})();
-</script>
-
-<script>
-/* ═══ MITRA TERVERIFIKASI: Fetch & Render ═══ */
-(async function() {
-  const loadingEl = document.getElementById('mt-verified-loading');
-  const gridEl = document.getElementById('mt-verified-grid');
-  const emptyEl = document.getElementById('mt-verified-empty');
-  
-  if (!loadingEl || !gridEl || !emptyEl) return; // not on this page
-  
-  // Wait for _sb (Supabase client) to be ready
-  let attempts = 0;
-  while (typeof window._sb === 'undefined' && attempts < 30) {
-    await new Promise(r => setTimeout(r, 100));
-    attempts++;
-  }
-  if (typeof window._sb === 'undefined') {
-    loadingEl.textContent = '⚠️ Tidak dapat memuat daftar mitra saat ini.';
-    return;
-  }
-  
-  try {
-    const { data, error } = await window._sb
-      .from('profiles')
-      .select('nama_depan, nama_belakang, sertifikasi, spesialisasi, foto_url')
-      .eq('is_mitra', true)
-      .order('nama_depan', { ascending: true });
-    
-    if (error) {
-      console.warn('Mitra fetch error:', error);
-      loadingEl.style.display = 'none';
-      emptyEl.style.display = 'block';
-      emptyEl.textContent = 'Belum ada mitra terverifikasi yang ditampilkan. Jadilah yang pertama bergabung sebagai mitra Avenir Research!';
-      return;
-    }
-    
-    loadingEl.style.display = 'none';
-    
-    if (!data || data.length === 0) {
-      emptyEl.style.display = 'block';
-      return;
-    }
-    
-    // Render cards
-    const cards = data.map(m => {
-      const namaFull = (m.nama_depan || '') + (m.nama_belakang ? ' ' + m.nama_belakang : '');
-      const initial = (m.nama_depan || '?').charAt(0).toUpperCase();
-      const cert = m.sertifikasi || '—';
-      const specs = Array.isArray(m.spesialisasi) ? m.spesialisasi : [];
-      
-      const photoHTML = m.foto_url
-        ? `<img src="${escapeHtml(m.foto_url)}" alt="${escapeHtml(namaFull)}" onerror="this.style.display='none';this.parentElement.textContent='${initial}'">`
-        : initial;
-      
-      const specHTML = specs.length > 0
-        ? `<div class="mt-verified-spec">${specs.map(s => `<span class="mt-verified-spec-tag">${escapeHtml(s)}</span>`).join('')}</div>`
-        : '';
-      
-      return `
-        <div class="mt-verified-card">
-          <div class="mt-verified-photo">${photoHTML}</div>
-          <h3 class="mt-verified-name">${escapeHtml(namaFull)}</h3>
-          <div class="mt-verified-cert">${escapeHtml(cert)}</div>
-          ${specHTML}
-        </div>
-      `;
-    });
-    
-    gridEl.innerHTML = cards.join('');
-    gridEl.style.display = 'grid';
-  } catch (e) {
-    console.warn('Mitra render error:', e);
-    loadingEl.style.display = 'none';
-    emptyEl.style.display = 'block';
-  }
-  
-  function escapeHtml(s) {
-    if (s == null) return '';
-    return String(s)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
-})();
-</script>
-
-
-<script>
-/* ═══ AVENIR PAGE VISITS TRACKER ═══ */
-(function() {
-  function track() {
+    // ━━━ AUTHORITATIVE: Get session langsung dari Supabase ━━━
+    setStatus('Mengecek login...');
     try {
-      // Wait for _sb available
-      if (typeof window._sb === 'undefined' || !window._sb.from) {
-        setTimeout(track, 300);
+      const { data } = await window._sb.auth.getSession();
+      user = data?.session?.user;
+      if (user && window.AUTH) window.AUTH.currentUser = user;
+    } catch (e) { console.warn('Session check failed:', e); }
+    
+    if (!user) {
+      checkingEl.style.display = 'none';
+      loginEl.style.display = 'block';
+      return;
+    }
+    
+    // Profile fetch — cache atau fresh
+    profile = window.AUTH?.profile;
+    if (!profile || profile.id !== user.id) {
+      setStatus('Memuat profil...');
+      try {
+        const profilePromise = window._sb.from('profiles').select('*').eq('id', user.id).maybeSingle();
+        const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 3000));
+        const result = await Promise.race([profilePromise, timeout]);
+        if (result?.data) {
+          profile = result.data;
+          if (window.AUTH) window.AUTH.profile = profile;
+        }
+      } catch (e) { console.warn('Profile fetch failed:', e); }
+    }
+    
+    const isAdmin = !!(profile && profile.is_admin);
+    
+    if (!isAdmin) {
+      checkingEl.style.display = 'none';
+      notAdminEl.style.display = 'block';
+      const emailEl = document.getElementById('admin-not-admin-email');
+      if (emailEl) emailEl.textContent = user.email || '-';
+      return;
+    }
+    
+    // ━━━ SHOW CONTENT ━━━
+    checkingEl.style.display = 'none';
+    loginEl.style.display = 'none';
+    notAdminEl.style.display = 'none';
+    contentEl.style.display = 'block';
+    
+    const nama = (profile.nama_depan || user.email.split('@')[0]);
+    document.getElementById('admin-name').textContent = nama;
+    Admin.isReady = true;
+    
+    Admin.loadPending();
+    setTimeout(() => Admin.loadMitra(), 100);
+    setTimeout(() => Admin.loadUser(), 200);
+    setTimeout(() => Admin.loadStats(), 300);
+  },
+  
+  async loadAll() {
+    await Promise.all([
+      Admin.loadPending(),
+      Admin.loadMitra(),
+      Admin.loadUser(),
+      Admin.loadStats()
+    ]);
+  },
+  
+  switchTab(tab) {
+    Admin.currentTab = tab;
+    document.querySelectorAll('.admin-tab-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.tab === tab);
+    });
+    document.querySelectorAll('.admin-pane').forEach(p => {
+      p.classList.toggle('active', p.id === 'admin-pane-' + tab);
+    });
+  },
+  
+  // ────────── PENDING MITRA ──────────
+  async loadPending() {
+    const container = document.getElementById('admin-pending-list');
+    const countEl = document.getElementById('admin-count-pending');
+    container.innerHTML = '<div class="admin-loading">⏳ Memuat...</div>';
+    
+    try {
+      // Pending: is_mitra=false AND ada sertifikasi
+      const { data, error } = await window._sb
+        .from('profiles')
+        .select('id, nama_depan, nama_belakang, no_hp, sertifikasi, spesialisasi, bio, link_portfolio, bank_name, rekening_number, rekening_holder, is_user, created_at')
+        .eq('is_mitra', false)
+        .not('sertifikasi', 'is', null)
+        .neq('sertifikasi', '')
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      
+      countEl.textContent = (data || []).length;
+      
+      if (!data || data.length === 0) {
+        container.innerHTML = `
+          <div class="admin-empty">
+            <div class="admin-empty-icon">📭</div>
+            <div class="admin-empty-title">Tidak Ada Pending</div>
+            <div class="admin-empty-sub">Semua aplikasi mitra sudah di-review.</div>
+          </div>
+        `;
         return;
       }
       
-      // Get or create anonymous_id (untuk guest)
-      let anonId = null;
-      try {
-        anonId = localStorage.getItem('av_anon_id');
-        if (!anonId) {
-          anonId = 'a_' + Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
-          localStorage.setItem('av_anon_id', anonId);
-        }
-      } catch (e) { /* localStorage blocked, fine */ }
+      // Fetch emails dari auth.users via RPC atau separate query (kalau bisa)
+      // Karena auth.users tidak accessible langsung dari client, kita pakai info yang ada di profiles
       
-      // Get user_id kalau login
-      const userId = window.AUTH?.currentUser?.id || null;
-      
-      // Get page path (clean format: /admin, /katalog, /news-coco-akuisisi-sma)
-      let path = window.location.pathname || '/';
-      path = path.replace(/\.html$/, '');  // strip .html
-      if (path === '' || path === '/') path = '/';
-      
-      // Skip tracking di /admin sendiri (avoid noise dari admin)
-      if (path === '/admin') return;
-      
-      // Insert visit (silent fail kalau error)
-      window._sb.from('page_visits').insert({
-        page_path: path,
-        user_id: userId,
-        anonymous_id: anonId,
-        user_agent: navigator.userAgent ? navigator.userAgent.substring(0, 200) : null
-      }).then(() => {}).catch(() => {});
-    } catch (e) { /* silent */ }
-  }
+      container.innerHTML = data.map(p => Admin.renderPendingCard(p)).join('');
+    } catch (e) {
+      console.error('Load pending error:', e);
+      container.innerHTML = `<div class="admin-empty"><div class="admin-empty-icon">⚠️</div><div class="admin-empty-title">Error</div><div class="admin-empty-sub">${Admin.escape(e.message || 'Gagal memuat data')}</div></div>`;
+    }
+  },
   
-  // Delay 1 detik biar AUTH sempat resolve dulu (untuk dapat user_id kalau login)
-  if (document.readyState === 'complete') {
-    setTimeout(track, 1000);
-  } else {
-    window.addEventListener('load', () => setTimeout(track, 1000));
+  renderPendingCard(p) {
+    const namaFull = (p.nama_depan || '?') + (p.nama_belakang ? ' ' + p.nama_belakang : '');
+    const specs = Array.isArray(p.spesialisasi) ? p.spesialisasi.join(', ') : '-';
+    const tanggal = p.created_at ? new Date(p.created_at).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }) : '-';
+    const jenis = p.is_user ? 'User existing (upgrade)' : 'Mitra-only baru';
+    
+    return `
+      <div class="admin-card" id="card-${p.id}">
+        <div class="admin-card-header">
+          <div>
+            <h3 class="admin-card-name">${Admin.escape(namaFull)}</h3>
+            <div class="admin-card-email">${Admin.escape(p.id)}</div>
+          </div>
+          <span class="admin-card-badge pending">⏳ Pending</span>
+        </div>
+        
+        <div class="admin-card-meta">
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">No HP</div>
+            <div class="admin-card-meta-value">${Admin.escape(p.no_hp || '-')}</div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Sertifikasi</div>
+            <div class="admin-card-meta-value">${Admin.escape(p.sertifikasi || '-')}</div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Spesialisasi</div>
+            <div class="admin-card-meta-value">${Admin.escape(specs)}</div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Jenis</div>
+            <div class="admin-card-meta-value">${jenis}</div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Bank</div>
+            <div class="admin-card-meta-value">${Admin.escape(p.bank_name || '-')}</div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">No Rekening</div>
+            <div class="admin-card-meta-value">${Admin.escape(p.rekening_number || '-')} <br><span style="font-size:11px;color:#9ca3af">a.n. ${Admin.escape(p.rekening_holder || '-')}</span></div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Portfolio</div>
+            <div class="admin-card-meta-value"><a href="${Admin.escape(p.link_portfolio || '#')}" target="_blank" rel="noopener">${Admin.escape(p.link_portfolio || '-')}</a></div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Dikirim</div>
+            <div class="admin-card-meta-value">${tanggal}</div>
+          </div>
+          ${p.bio ? `<div class="admin-card-meta-value bio"><strong>Bio:</strong> ${Admin.escape(p.bio)}</div>` : ''}
+        </div>
+        
+        <div class="admin-card-actions">
+          <button class="admin-btn admin-btn-approve" onclick="Admin.approve('${p.id}')">✅ Approve sebagai Mitra</button>
+          <button class="admin-btn admin-btn-reject" onclick="Admin.reject('${p.id}')">❌ Reject (jadi User biasa)</button>
+          <button class="admin-btn admin-btn-edit" onclick='Admin.openEdit(${JSON.stringify(p).replace(/'/g, "&#39;")})'>✏️ Edit Data</button>
+          <button class="admin-btn admin-btn-delete" onclick="Admin.deleteUser('${p.id}', '${Admin.escape(namaFull)}')">🗑️ Hapus</button>
+        </div>
+      </div>
+    `;
+  },
+  
+  // ────────── MITRA AKTIF ──────────
+  async loadMitra() {
+    const container = document.getElementById('admin-mitra-list');
+    const countEl = document.getElementById('admin-count-mitra');
+    container.innerHTML = '<div class="admin-loading">⏳ Memuat...</div>';
+    
+    try {
+      const { data, error } = await window._sb
+        .from('profiles')
+        .select('id, nama_depan, nama_belakang, no_hp, sertifikasi, spesialisasi, bio, link_portfolio, bank_name, rekening_number, rekening_holder, foto_url, is_admin, created_at')
+        .eq('is_mitra', true)
+        .order('nama_depan', { ascending: true });
+      
+      if (error) throw error;
+      
+      countEl.textContent = (data || []).length;
+      
+      if (!data || data.length === 0) {
+        container.innerHTML = `
+          <div class="admin-empty">
+            <div class="admin-empty-icon">👥</div>
+            <div class="admin-empty-title">Belum Ada Mitra Aktif</div>
+            <div class="admin-empty-sub">Approve aplikasi pending untuk menambah mitra.</div>
+          </div>
+        `;
+        return;
+      }
+      
+      container.innerHTML = data.map(p => Admin.renderMitraCard(p)).join('');
+    } catch (e) {
+      console.error('Load mitra error:', e);
+      container.innerHTML = `<div class="admin-empty"><div class="admin-empty-icon">⚠️</div><div class="admin-empty-title">Error</div><div class="admin-empty-sub">${Admin.escape(e.message || 'Gagal memuat')}</div></div>`;
+    }
+  },
+  
+  renderMitraCard(p) {
+    const namaFull = (p.nama_depan || '?') + (p.nama_belakang ? ' ' + p.nama_belakang : '');
+    const specs = Array.isArray(p.spesialisasi) ? p.spesialisasi.join(', ') : '-';
+    const tanggal = p.created_at ? new Date(p.created_at).toLocaleString('id-ID', { dateStyle: 'medium' }) : '-';
+    const adminBadge = p.is_admin ? '<span class="admin-card-badge approved" style="background:#fef3c7;color:#92400e;margin-left:6px">⚙️ Admin</span>' : '';
+    
+    return `
+      <div class="admin-card" id="card-${p.id}">
+        <div class="admin-card-header">
+          <div>
+            <h3 class="admin-card-name">${Admin.escape(namaFull)}</h3>
+            <div class="admin-card-email">${Admin.escape(p.id)}</div>
+          </div>
+          <div>
+            <span class="admin-card-badge approved">✅ Aktif</span>
+            ${adminBadge}
+          </div>
+        </div>
+        
+        <div class="admin-card-meta">
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Sertifikasi</div>
+            <div class="admin-card-meta-value">${Admin.escape(p.sertifikasi || '-')}</div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Spesialisasi</div>
+            <div class="admin-card-meta-value">${Admin.escape(specs)}</div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">No HP</div>
+            <div class="admin-card-meta-value">${Admin.escape(p.no_hp || '-')}</div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Foto</div>
+            <div class="admin-card-meta-value">${p.foto_url ? '<a href="' + Admin.escape(p.foto_url) + '" target="_blank">Lihat</a>' : '-'}</div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Bank</div>
+            <div class="admin-card-meta-value">${Admin.escape(p.bank_name || '-')} ${p.rekening_number ? ' / ' + Admin.escape(p.rekening_number) : ''}</div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Approved Sejak</div>
+            <div class="admin-card-meta-value">${tanggal}</div>
+          </div>
+          ${p.bio ? `<div class="admin-card-meta-value bio"><strong>Bio:</strong> ${Admin.escape(p.bio)}</div>` : ''}
+        </div>
+        
+        <div class="admin-card-actions">
+          <button class="admin-btn admin-btn-cabut" onclick="Admin.cabutMitra('${p.id}', '${Admin.escape(namaFull)}')">⛔ Cabut Status Mitra</button>
+          <button class="admin-btn admin-btn-edit" onclick='Admin.openEdit(${JSON.stringify(p).replace(/'/g, "&#39;")})'>✏️ Edit Data</button>
+          <button class="admin-btn admin-btn-delete" onclick="Admin.deleteUser('${p.id}', '${Admin.escape(namaFull)}')">🗑️ Hapus</button>
+        </div>
+      </div>
+    `;
+  },
+  
+  // ────────── USER SUBSCRIBER ──────────
+  async loadUser() {
+    const container = document.getElementById('admin-user-list');
+    const countEl = document.getElementById('admin-count-user');
+    container.innerHTML = '<div class="admin-loading">⏳ Memuat...</div>';
+    
+    try {
+      const { data, error } = await window._sb
+        .from('profiles')
+        .select('id, nama_depan, nama_belakang, profil_investor, trial_started_at, subscription_until, is_user, is_mitra, is_admin, created_at')
+        .eq('is_user', true)
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      
+      countEl.textContent = (data || []).length;
+      
+      if (!data || data.length === 0) {
+        container.innerHTML = `<div class="admin-empty"><div class="admin-empty-icon">👤</div><div class="admin-empty-title">Belum Ada User</div></div>`;
+        return;
+      }
+      
+      container.innerHTML = data.map(p => Admin.renderUserCard(p)).join('');
+    } catch (e) {
+      console.error('Load user error:', e);
+      container.innerHTML = `<div class="admin-empty"><div class="admin-empty-icon">⚠️</div><div class="admin-empty-title">Error</div><div class="admin-empty-sub">${Admin.escape(e.message || 'Gagal memuat')}</div></div>`;
+    }
+  },
+  
+  renderUserCard(p) {
+    const namaFull = (p.nama_depan || '?') + (p.nama_belakang ? ' ' + p.nama_belakang : '');
+    const tanggal = p.created_at ? new Date(p.created_at).toLocaleString('id-ID', { dateStyle: 'medium' }) : '-';
+    
+    let status = 'Active';
+    let statusBadgeClass = 'user';
+    if (p.subscription_until) {
+      const subEnd = new Date(p.subscription_until);
+      if (subEnd > new Date()) {
+        status = 'Subscriber (s/d ' + subEnd.toLocaleDateString('id-ID') + ')';
+        statusBadgeClass = 'approved';
+      } else {
+        status = 'Trial expired';
+      }
+    } else if (p.trial_started_at) {
+      const trial = new Date(p.trial_started_at);
+      const trialEnd = new Date(trial.getTime() + 60*24*60*60*1000);
+      if (trialEnd > new Date()) {
+        const daysLeft = Math.ceil((trialEnd - new Date()) / (24*60*60*1000));
+        status = `Trial (${daysLeft} hari lagi)`;
+      } else {
+        status = 'Trial expired';
+      }
+    }
+    
+    const tags = [];
+    if (p.is_admin) tags.push('<span class="admin-card-badge approved" style="background:#fef3c7;color:#92400e;margin-left:6px">⚙️ Admin</span>');
+    if (p.is_mitra) tags.push('<span class="admin-card-badge approved" style="margin-left:6px">✅ Mitra</span>');
+    
+    return `
+      <div class="admin-card" id="card-${p.id}">
+        <div class="admin-card-header">
+          <div>
+            <h3 class="admin-card-name">${Admin.escape(namaFull)}</h3>
+            <div class="admin-card-email">${Admin.escape(p.id)}</div>
+          </div>
+          <div>
+            <span class="admin-card-badge ${statusBadgeClass}">${Admin.escape(status)}</span>
+            ${tags.join('')}
+          </div>
+        </div>
+        
+        <div class="admin-card-meta">
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Profil Investor</div>
+            <div class="admin-card-meta-value">${Admin.escape(p.profil_investor || '-')}</div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Trial Started</div>
+            <div class="admin-card-meta-value">${p.trial_started_at ? new Date(p.trial_started_at).toLocaleDateString('id-ID') : '-'}</div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Subscription Until</div>
+            <div class="admin-card-meta-value">${p.subscription_until ? new Date(p.subscription_until).toLocaleDateString('id-ID') : '-'}</div>
+          </div>
+          <div class="admin-card-meta-item">
+            <div class="admin-card-meta-label">Daftar Sejak</div>
+            <div class="admin-card-meta-value">${tanggal}</div>
+          </div>
+        </div>
+        
+        <div class="admin-card-actions">
+          <button class="admin-btn admin-btn-edit" onclick="Admin.extendSub('${p.id}', '${Admin.escape(namaFull)}')">📅 Extend Subscription</button>
+          <button class="admin-btn admin-btn-delete" onclick="Admin.deleteUser('${p.id}', '${Admin.escape(namaFull)}')">🗑️ Hapus</button>
+        </div>
+      </div>
+    `;
+  },
+  
+  // ────────── STATISTIK ──────────
+  async loadStats() {
+    const container = document.getElementById('admin-stats-content');
+    container.innerHTML = '<div class="admin-loading">⏳ Memuat statistik...</div>';
+    
+    try {
+      const [allProfiles, viewsResult] = await Promise.all([
+        window._sb.from('profiles').select('id, is_user, is_mitra, is_admin, sertifikasi, subscription_until, trial_started_at, created_at'),
+        window._sb.from('research_views').select('research_id', { count: 'exact', head: true }).catch(() => ({ count: 0 }))
+      ]);
+      
+      const profiles = allProfiles.data || [];
+      const totalUser = profiles.filter(p => p.is_user).length;
+      const totalMitra = profiles.filter(p => p.is_mitra).length;
+      const totalPending = profiles.filter(p => !p.is_mitra && p.sertifikasi).length;
+      const totalAdmin = profiles.filter(p => p.is_admin).length;
+      
+      // Active subscribers
+      const now = new Date();
+      const activeSubs = profiles.filter(p => p.subscription_until && new Date(p.subscription_until) > now).length;
+      const activeTrials = profiles.filter(p => {
+        if (!p.trial_started_at) return false;
+        const trialEnd = new Date(new Date(p.trial_started_at).getTime() + 60*24*60*60*1000);
+        return trialEnd > now;
+      }).length;
+      
+      // Daftar baru bulan ini
+      const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+      const newThisMonth = profiles.filter(p => p.created_at && new Date(p.created_at) >= monthStart).length;
+      
+      const totalViews = viewsResult.count || 0;
+      
+      container.innerHTML = `
+        <div class="admin-stats-grid">
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Total User Subscriber</div>
+            <div class="admin-stat-value">${totalUser}</div>
+            <div class="admin-stat-sub">Akun aktif sebagai pengguna</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Mitra Aktif</div>
+            <div class="admin-stat-value">${totalMitra}</div>
+            <div class="admin-stat-sub">Mitra terverifikasi</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Pending Mitra</div>
+            <div class="admin-stat-value" style="color:#854d0e">${totalPending}</div>
+            <div class="admin-stat-sub">Menunggu review</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Admin</div>
+            <div class="admin-stat-value">${totalAdmin}</div>
+            <div class="admin-stat-sub">Akses admin console</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Trial Aktif</div>
+            <div class="admin-stat-value" style="color:#1e40af">${activeTrials}</div>
+            <div class="admin-stat-sub">User dalam masa trial 60 hari</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Subscriber Berbayar</div>
+            <div class="admin-stat-value" style="color:#15803d">${activeSubs}</div>
+            <div class="admin-stat-sub">Subscription belum expired</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Daftar Bulan Ini</div>
+            <div class="admin-stat-value">${newThisMonth}</div>
+            <div class="admin-stat-sub">${now.toLocaleString('id-ID', { month: 'long', year: 'numeric' })}</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Total Research Views</div>
+            <div class="admin-stat-value">${totalViews}</div>
+            <div class="admin-stat-sub">Akumulasi sepanjang waktu</div>
+          </div>
+        </div>
+        
+        <div style="background:#fafaf7;padding:20px 24px;border-radius:12px;border:1px solid #e5e7eb">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#14532d;margin:0 0 12px">📊 Quick Insights</h3>
+          <ul style="font-size:13.5px;line-height:1.8;color:#374151;margin:0;padding-left:20px">
+            <li><strong>${totalMitra}</strong> mitra aktif sedang berproduksi riset</li>
+            <li><strong>${totalPending}</strong> aplikasi mitra menunggu review (cek tab Pending)</li>
+            <li><strong>${activeTrials}</strong> user masih dalam masa trial 60 hari gratis</li>
+            <li><strong>${activeSubs}</strong> subscriber berbayar aktif</li>
+            <li><strong>${newThisMonth}</strong> akun baru terdaftar bulan ${now.toLocaleString('id-ID', { month: 'long' })}</li>
+          </ul>
+        </div>
+      `;
+    } catch (e) {
+      console.error('Stats error:', e);
+      container.innerHTML = `<div class="admin-empty"><div class="admin-empty-icon">⚠️</div><div class="admin-empty-title">Error Memuat Statistik</div><div class="admin-empty-sub">${Admin.escape(e.message || '')}</div></div>`;
+    }
+  },
+  
+  // ────────── ACTIONS ──────────
+  async approve(id) {
+    if (!confirm('Approve sebagai Mitra Avenir Research? Mitra ini akan langsung muncul di halaman publik dan punya akses dashboard mitra.')) return;
+    
+    try {
+      const { error } = await window._sb.from('profiles').update({ is_mitra: true }).eq('id', id);
+      if (error) throw error;
+      
+      alert('✅ Berhasil approved sebagai mitra. Refresh halaman /mitra untuk lihat perubahan.');
+      await Admin.loadAll();
+    } catch (e) {
+      alert('❌ Gagal approve: ' + (e.message || 'unknown error'));
+    }
+  },
+  
+  async reject(id) {
+    if (!confirm('Reject aplikasi mitra ini? Data mitra akan dihapus tapi akun tetap aktif sebagai user biasa. Pastikan Anda sudah memberi notifikasi ke applicant.')) return;
+    
+    try {
+      const { error } = await window._sb.from('profiles').update({
+        sertifikasi: null,
+        bio: null,
+        spesialisasi: null,
+        link_portfolio: null,
+        no_hp: null,
+        bank_name: null,
+        rekening_number: null,
+        rekening_holder: null,
+        is_user: true  // ensure user access
+      }).eq('id', id);
+      if (error) throw error;
+      
+      alert('✅ Aplikasi mitra di-reject. Akun tetap aktif sebagai user biasa.');
+      await Admin.loadAll();
+    } catch (e) {
+      alert('❌ Gagal reject: ' + (e.message || 'unknown'));
+    }
+  },
+  
+  async cabutMitra(id, nama) {
+    if (!confirm(`Cabut status Mitra dari "${nama}"? Profilnya tidak akan muncul lagi di halaman publik /mitra.\n\nData riset historikal akan tetap aman. Akun mereka tetap aktif (tidak terhapus).`)) return;
+    
+    try {
+      const { error } = await window._sb.from('profiles').update({ is_mitra: false }).eq('id', id);
+      if (error) throw error;
+      
+      alert('✅ Status mitra dicabut.');
+      await Admin.loadAll();
+    } catch (e) {
+      alert('❌ Gagal: ' + (e.message || 'unknown'));
+    }
+  },
+  
+  async deleteUser(id, nama) {
+    const confirm1 = prompt(`⚠️ HAPUS PERMANEN akun "${nama}"?\n\nAksi ini akan menghapus profil di tabel profiles.\nData TIDAK BISA DIKEMBALIKAN.\n\nUntuk konfirmasi, ketik HAPUS (huruf kapital):`);
+    if (confirm1 !== 'HAPUS') {
+      alert('Dibatalkan.');
+      return;
+    }
+    
+    try {
+      const { error } = await window._sb.from('profiles').delete().eq('id', id);
+      if (error) throw error;
+      
+      alert('✅ Profile dihapus dari tabel profiles.\n\n⚠️ Catatan: akun di auth.users masih ada. Untuk hapus total (sehingga email bisa register ulang), buka Supabase Dashboard → Authentication → Users → search ID → Delete user.');
+      await Admin.loadAll();
+    } catch (e) {
+      alert('❌ Gagal: ' + (e.message || 'unknown'));
+    }
+  },
+  
+  async extendSub(id, nama) {
+    const months = prompt(`Extend subscription untuk "${nama}"?\n\nMasukkan jumlah bulan (1, 3, 6, atau 12):`, '1');
+    if (!months) return;
+    
+    const m = parseInt(months);
+    if (isNaN(m) || m < 1 || m > 24) {
+      alert('Jumlah bulan tidak valid. Masukkan angka 1-24.');
+      return;
+    }
+    
+    try {
+      // Get current subscription_until
+      const { data: profile } = await window._sb.from('profiles').select('subscription_until').eq('id', id).single();
+      
+      const now = new Date();
+      const startDate = (profile?.subscription_until && new Date(profile.subscription_until) > now)
+        ? new Date(profile.subscription_until)
+        : now;
+      const newEnd = new Date(startDate);
+      newEnd.setMonth(newEnd.getMonth() + m);
+      
+      const { error } = await window._sb.from('profiles').update({
+        subscription_until: newEnd.toISOString()
+      }).eq('id', id);
+      
+      if (error) throw error;
+      
+      alert(`✅ Subscription diperpanjang ${m} bulan. Berakhir: ${newEnd.toLocaleDateString('id-ID')}`);
+      await Admin.loadUser();
+      await Admin.loadStats();
+    } catch (e) {
+      alert('❌ Gagal: ' + (e.message || 'unknown'));
+    }
+  },
+  
+  // ────────── EDIT MODAL ──────────
+  openEdit(profile) {
+    document.getElementById('edit-id').value = profile.id;
+    document.getElementById('edit-nama-depan').value = profile.nama_depan || '';
+    document.getElementById('edit-nama-belakang').value = profile.nama_belakang || '';
+    document.getElementById('edit-sertifikasi').value = profile.sertifikasi || '';
+    document.getElementById('edit-spesialisasi').value = Array.isArray(profile.spesialisasi) ? profile.spesialisasi.join(', ') : '';
+    document.getElementById('edit-bio').value = profile.bio || '';
+    document.getElementById('edit-portfolio').value = profile.link_portfolio || '';
+    document.getElementById('edit-hp').value = profile.no_hp || '';
+    // Foto state init
+    Admin._editProfileId = profile.id;
+    Admin._editFotoUrl = profile.foto_url || null;
+    const initial = (profile.nama_depan || '?').charAt(0).toUpperCase();
+    document.getElementById('edit-foto-initial').textContent = initial;
+    
+    if (profile.foto_url) {
+      document.getElementById('edit-foto-current-img').src = profile.foto_url;
+      document.getElementById('edit-foto-current-img').style.display = 'block';
+      document.getElementById('edit-foto-initial').style.display = 'none';
+      document.getElementById('edit-foto-delete-btn').style.display = 'inline-block';
+    } else {
+      document.getElementById('edit-foto-current-img').style.display = 'none';
+      document.getElementById('edit-foto-initial').style.display = 'block';
+      document.getElementById('edit-foto-delete-btn').style.display = 'none';
+    }
+    document.getElementById('edit-foto-msg').style.display = 'none';
+    
+    const fotoInput = document.getElementById('edit-foto-input');
+    if (fotoInput && !fotoInput._adminListenerSet) {
+      fotoInput.addEventListener('change', (e) => Admin.uploadFotoFromAdmin(e.target.files[0]));
+      fotoInput._adminListenerSet = true;
+    }
+    document.getElementById('edit-msg').style.display = 'none';
+    document.getElementById('admin-edit-modal').classList.add('open');
+  },
+  
+  // ━━━ FOTO PROFIL: admin upload/delete dari Edit Modal ━━━
+  _editProfileId: null,
+  _editFotoUrl: null,
+  
+  async uploadFotoFromAdmin(file) {
+    if (!file) return;
+    if (!Admin._editProfileId) return;
+    
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) {
+      Admin._editFotoMsg('Format tidak didukung (pakai JPG/PNG/WEBP).', 'error');
+      return;
+    }
+    
+    if (file.size > 2 * 1024 * 1024) {
+      Admin._editFotoMsg('Foto > 2 MB, gak bisa upload.', 'error');
+      return;
+    }
+    
+    Admin._editFotoMsg('⏳ Uploading foto...', 'info');
+    
+    try {
+      const ext = file.name.split('.').pop().toLowerCase();
+      const path = Admin._editProfileId + '/profile.' + ext;
+      
+      const { error: uploadError } = await window._sb.storage
+        .from('mitra-photos')
+        .upload(path, file, { cacheControl: '3600', upsert: true });
+      
+      if (uploadError) {
+        Admin._editFotoMsg('Upload gagal: ' + uploadError.message, 'error');
+        return;
+      }
+      
+      const { data: urlData } = window._sb.storage.from('mitra-photos').getPublicUrl(path);
+      const fotoUrl = urlData?.publicUrl ? urlData.publicUrl + '?t=' + Date.now() : null;
+      
+      const { error: updateError } = await window._sb
+        .from('profiles')
+        .update({ foto_url: fotoUrl })
+        .eq('id', Admin._editProfileId);
+      
+      if (updateError) {
+        Admin._editFotoMsg('Upload OK tapi update gagal: ' + updateError.message, 'error');
+        return;
+      }
+      
+      Admin._editFotoUrl = fotoUrl;
+      document.getElementById('edit-foto-current-img').src = fotoUrl;
+      document.getElementById('edit-foto-current-img').style.display = 'block';
+      document.getElementById('edit-foto-initial').style.display = 'none';
+      document.getElementById('edit-foto-delete-btn').style.display = 'inline-block';
+      Admin._editFotoMsg('✓ Foto berhasil diupdate', 'success');
+    } catch (e) {
+      Admin._editFotoMsg('Error: ' + (e.message || 'unknown'), 'error');
+    }
+  },
+  
+  async deleteFotoFromAdmin() {
+    if (!confirm('Hapus foto profil mitra ini?')) return;
+    if (!Admin._editProfileId) return;
+    
+    try {
+      const { error } = await window._sb
+        .from('profiles')
+        .update({ foto_url: null })
+        .eq('id', Admin._editProfileId);
+      
+      if (error) {
+        Admin._editFotoMsg('Gagal hapus: ' + error.message, 'error');
+        return;
+      }
+      
+      try {
+        await window._sb.storage.from('mitra-photos').remove([
+          Admin._editProfileId + '/profile.jpg',
+          Admin._editProfileId + '/profile.jpeg',
+          Admin._editProfileId + '/profile.png',
+          Admin._editProfileId + '/profile.webp'
+        ]);
+      } catch (e) { /* silent */ }
+      
+      Admin._editFotoUrl = null;
+      document.getElementById('edit-foto-current-img').style.display = 'none';
+      document.getElementById('edit-foto-initial').style.display = 'block';
+      document.getElementById('edit-foto-delete-btn').style.display = 'none';
+      Admin._editFotoMsg('✓ Foto dihapus', 'success');
+    } catch (e) {
+      Admin._editFotoMsg('Error: ' + (e.message || 'unknown'), 'error');
+    }
+  },
+  
+  _editFotoMsg(msg, type) {
+    const el = document.getElementById('edit-foto-msg');
+    if (!el) return;
+    
+    if (!msg) { el.style.display = 'none'; return; }
+    
+    el.style.display = 'block';
+    el.textContent = msg;
+    
+    if (type === 'success') {
+      el.style.background = '#dcfce7';
+      el.style.color = '#166534';
+      setTimeout(() => { el.style.display = 'none'; }, 3000);
+    } else if (type === 'error') {
+      el.style.background = '#fee2e2';
+      el.style.color = '#991b1b';
+    } else {
+      el.style.background = '#dbeafe';
+      el.style.color = '#1e40af';
+    }
+  },
+  
+    closeEdit() {
+    document.getElementById('admin-edit-modal').classList.remove('open');
+  },
+  
+  async saveEdit() {
+    const id = document.getElementById('edit-id').value;
+    const btn = document.getElementById('edit-save-btn');
+    const msgEl = document.getElementById('edit-msg');
+    
+    const updates = {
+      nama_depan: document.getElementById('edit-nama-depan').value.trim() || null,
+      nama_belakang: document.getElementById('edit-nama-belakang').value.trim() || null,
+      sertifikasi: document.getElementById('edit-sertifikasi').value.trim() || null,
+      spesialisasi: document.getElementById('edit-spesialisasi').value.split(',').map(s => s.trim()).filter(Boolean),
+      bio: document.getElementById('edit-bio').value.trim() || null,
+      link_portfolio: document.getElementById('edit-portfolio').value.trim() || null,
+      no_hp: document.getElementById('edit-hp').value.trim() || null,
+      // foto_url di-handle terpisah via uploadFotoFromAdmin/deleteFotoFromAdmin
+    };
+    
+    btn.disabled = true;
+    btn.textContent = 'Menyimpan...';
+    
+    try {
+      const { error } = await window._sb.from('profiles').update(updates).eq('id', id);
+      if (error) throw error;
+      
+      msgEl.style.display = 'block';
+      msgEl.style.background = '#dcfce7';
+      msgEl.style.color = '#166534';
+      msgEl.textContent = '✅ Berhasil disimpan!';
+      
+      setTimeout(() => {
+        Admin.closeEdit();
+        Admin.loadAll();
+      }, 1000);
+    } catch (e) {
+      msgEl.style.display = 'block';
+      msgEl.style.background = '#fee2e2';
+      msgEl.style.color = '#991b1b';
+      msgEl.textContent = '❌ Error: ' + (e.message || 'unknown');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Simpan';
+    }
+  },
+  
+  escape(s) {
+    if (s == null) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
   }
-})();
+};
+
+// Expose to window
+window.Admin = Admin;
+
+// Auto-init when DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => Admin.init());
+} else {
+  Admin.init();
+}
 </script>
 
+
+<script>
+// ━━━ AUTH STATE LISTENER khusus untuk halaman /admin ━━━
+(function() {
+  function attachListener() {
+    if (typeof window._sb === 'undefined' || !window._sb.auth) {
+      setTimeout(attachListener, 200);
+      return;
+    }
+    window._sb.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' || event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
+        if (window.Admin && typeof window.Admin.init === 'function') {
+          setTimeout(() => window.Admin.init(), 150);
+        }
+      }
+    });
+  }
+  attachListener();
+})();
+</script>
 </body>
 </html>
